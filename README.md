@@ -35,4 +35,4 @@ Cuenta de prueba: `demo@micarrera.ar` / `micarrera1` (viene con 4 favoritas de e
 
 ## Sistema visual
 
-Violeta `#4A2BA0` como marca, amarillo `#FFD84D` para "gratuita", un color por modalidad (presencial, semipresencial, virtual), tipografía Archivo, modo claro/oscuro y breakpoints en 1060, 900 y 720 px.
+Violeta `#4A2BA0` como marca, amarillo `#FFD84D` para "gratuita", un ícono por modalidad (presencial: persona, semipresencial: persona + notebook, virtual: notebook) dentro de una etiqueta violeta con el ícono en blanco, tipografía Archivo, modo claro/oscuro y breakpoints en 1060, 900 y 720 px.
