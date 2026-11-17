@@ -1,176 +1,369 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>MiCarrera - Favoritos y comparación</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&display=swap">
-    <link rel="stylesheet" href="assets/css/micarrera.css">
-    <script>try { const t = localStorage.getItem('micarrera-tema'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>MiCarrera - Favoritos y comparación</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&display=swap">
+  <link rel="stylesheet" href="assets/css/micarrera.css">
+  <script>try { const t = localStorage.getItem('micarrera-tema'); if (t) document.documentElement.dataset.theme = t; } catch (e) { }</script>
 </head>
+
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
-  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></symbol>
-  <symbol id="i-left" viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></symbol>
-  <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
-  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M9 6v12M15 6v12"/></symbol>
-  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></symbol>
-  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6-5.5-6-11a6 6 0 0 1 12 0c0 5.5-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/></symbol>
-  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0M16 5.2a3 3 0 0 1 0 5.6M17.5 14.2a5.5 5.5 0 0 1 3 4.8"/></symbol>
-  <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></symbol>
-  <symbol id="i-plus" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8v8M8 12h8"/></symbol>
-  <symbol id="i-laptop" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 19h20"/></symbol>
-  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6"/></symbol>
-  <symbol id="i-mind" viewBox="0 0 24 24"><circle cx="12" cy="10" r="6"/><path d="M9 20h6M12 16v4M10 9a2 2 0 1 1 3 1.7c-.6.4-1 .8-1 1.3"/></symbol>
-  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 3l6 6-6 12-6-12 6-6z"/><circle cx="12" cy="11" r="1.8"/><path d="M12 13v8"/></symbol>
-  <symbol id="i-bank" viewBox="0 0 24 24"><path d="M3 10h18L12 4 3 10zM5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/></symbol>
-  <symbol id="i-gov" viewBox="0 0 24 24"><path d="M4 20V9l8-5 8 5v11M9 20v-6h6v6M3 20h18"/></symbol>
-  <symbol id="i-cap" viewBox="0 0 24 24"><path d="m2 9 10-5 10 5-10 5L2 9z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/></symbol>
-  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></symbol>
-  <symbol id="i-door" viewBox="0 0 24 24"><path d="M6 20V4h9l3 2v14M3 20h18M12 12h.01"/></symbol>
-  <symbol id="i-trend" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></symbol>
-  <symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M14.8 9.3c-.6-.8-1.6-1.3-2.8-1.3-1.7 0-3 .9-3 2s1.3 1.7 3 2 3 .9 3 2-1.3 2-3 2c-1.3 0-2.4-.5-3-1.4M12 6.5V8M12 16v1.5"/></symbol>
-  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></symbol>
-  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
-  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
-  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
-  <symbol id="i-team" viewBox="0 0 24 24"><circle cx="12" cy="7" r="3"/><circle cx="5" cy="10" r="2.2"/><circle cx="19" cy="10" r="2.2"/><path d="M7 20a5 5 0 0 1 10 0M1.5 18a3.5 3.5 0 0 1 5-3.2M22.5 18a3.5 3.5 0 0 0-5-3.2"/></symbol>
-</svg>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-search" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="7" />
+      <path d="m20 20-3.5-3.5" />
+    </symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24">
+      <path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" />
+    </symbol>
+    <symbol id="i-left" viewBox="0 0 24 24">
+      <path d="m15 6-6 6 6 6" />
+    </symbol>
+    <symbol id="i-right" viewBox="0 0 24 24">
+      <path d="m9 6 6 6-6 6" />
+    </symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24">
+      <path d="M9 6v12M15 6v12" />
+    </symbol>
+    <symbol id="i-play" viewBox="0 0 24 24">
+      <path d="M8 5.5v13l10.5-6.5z" />
+    </symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24">
+      <path d="M12 21s-6-5.5-6-11a6 6 0 0 1 12 0c0 5.5-6 11-6 11z" />
+      <circle cx="12" cy="10" r="2.2" />
+    </symbol>
+    <symbol id="i-users" viewBox="0 0 24 24">
+      <circle cx="9" cy="8" r="3.2" />
+      <path d="M3.5 19a5.5 5.5 0 0 1 11 0M16 5.2a3 3 0 0 1 0 5.6M17.5 14.2a5.5 5.5 0 0 1 3 4.8" />
+    </symbol>
+    <symbol id="i-code" viewBox="0 0 24 24">
+      <path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14" />
+    </symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24">
+      <rect x="4" y="4" width="16" height="16" rx="4" />
+      <path d="M12 8v8M8 12h8" />
+    </symbol>
+    <symbol id="i-laptop" viewBox="0 0 24 24">
+      <rect x="4" y="5" width="16" height="11" rx="1.5" />
+      <path d="M2 19h20" />
+    </symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24">
+      <path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6" />
+    </symbol>
+    <symbol id="i-mind" viewBox="0 0 24 24">
+      <circle cx="12" cy="10" r="6" />
+      <path d="M9 20h6M12 16v4M10 9a2 2 0 1 1 3 1.7c-.6.4-1 .8-1 1.3" />
+    </symbol>
+    <symbol id="i-pen" viewBox="0 0 24 24">
+      <path d="M12 3l6 6-6 12-6-12 6-6z" />
+      <circle cx="12" cy="11" r="1.8" />
+      <path d="M12 13v8" />
+    </symbol>
+    <symbol id="i-bank" viewBox="0 0 24 24">
+      <path d="M3 10h18L12 4 3 10zM5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18" />
+    </symbol>
+    <symbol id="i-gov" viewBox="0 0 24 24">
+      <path d="M4 20V9l8-5 8 5v11M9 20v-6h6v6M3 20h18" />
+    </symbol>
+    <symbol id="i-cap" viewBox="0 0 24 24">
+      <path d="m2 9 10-5 10 5-10 5L2 9z" />
+      <path d="M6 11v5c3 2 9 2 12 0v-5" />
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24">
+      <path d="m5 12 4.5 4.5L19 7" />
+    </symbol>
+    <symbol id="i-door" viewBox="0 0 24 24">
+      <path d="M6 20V4h9l3 2v14M3 20h18M12 12h.01" />
+    </symbol>
+    <symbol id="i-trend" viewBox="0 0 24 24">
+      <path d="M3 17l6-6 4 4 8-8M15 7h6v6" />
+    </symbol>
+    <symbol id="i-coin" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="8" />
+      <path
+        d="M14.8 9.3c-.6-.8-1.6-1.3-2.8-1.3-1.7 0-3 .9-3 2s1.3 1.7 3 2 3 .9 3 2-1.3 2-3 2c-1.3 0-2.4-.5-3-1.4M12 6.5V8M12 16v1.5" />
+    </symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24">
+      <path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z" />
+    </symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+    </symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24">
+      <path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" />
+    </symbol>
+    <symbol id="i-x" viewBox="0 0 24 24">
+      <path d="M6 6l12 12M18 6 6 18" />
+    </symbol>
+    <symbol id="i-team" viewBox="0 0 24 24">
+      <circle cx="12" cy="7" r="3" />
+      <circle cx="5" cy="10" r="2.2" />
+      <circle cx="19" cy="10" r="2.2" />
+      <path d="M7 20a5 5 0 0 1 10 0M1.5 18a3.5 3.5 0 0 1 5-3.2M22.5 18a3.5 3.5 0 0 0-5-3.2" />
+    </symbol>
+  </svg>
 
-<header class="nav">
-  <div class="wrap nav-in">
-    <a class="logo" href="index.html#inicio"><span class="logo-mark" aria-hidden="true"></span>MiCarrera</a>
-    <nav aria-label="Principal">
-      <a href="index.html#inicio">Inicio</a>
-      <a href="index.html#resultados">Carreras</a>
-      <a href="index.html#detalle">Detalle</a>
-      <a href="#comparar">Comparar</a>
-    </nav>
-    <div class="nav-actions">
-      <button class="btn-icon" id="themeToggle" type="button" aria-label="Cambiar a modo oscuro"><svg class="i"><use href="#i-moon"/></svg></button>
-      <a class="btn btn-ghost" href="#favoritos"><svg class="i"><use href="#i-heart"/></svg>Favoritos <span class="count" data-fav-count>0</span></a>
-      <a class="btn btn-primary" data-auth href="login.html">Ingresar</a>
+  <header class="nav">
+    <div class="wrap nav-in">
+      <a class="logo" href="index.html#inicio"><span class="logo-mark" aria-hidden="true"></span>MiCarrera</a>
+      <nav aria-label="Principal">
+        <a href="index.html#inicio">Inicio</a>
+        <a href="index.html#resultados">Carreras</a>
+        <a href="index.html#detalle">Detalle</a>
+        <a href="#comparar">Comparar</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="btn-icon" id="themeToggle" type="button" aria-label="Cambiar a modo oscuro"><svg class="i">
+            <use href="#i-moon" />
+          </svg></button>
+        <a class="btn btn-ghost" href="#favoritos"><svg class="i">
+            <use href="#i-heart" />
+          </svg>Favoritos <span class="count" data-fav-count>0</span></a>
+        <a class="btn btn-primary" data-auth href="login.html">Ingresar</a>
+      </div>
     </div>
-  </div>
-</header>
+  </header>
 
-<main class="wrap">
-  <!-- ============ FAVORITOS ============ -->
-  <section class="sec" id="favoritos" aria-labelledby="h-fav">
-    <header class="sec-head">
-      <h2 id="h-fav">Mis carreras favoritas</h2>
-      <p>Revisá y gestioná las carreras que te interesan. Marcá dos o más para compararlas lado a lado.</p>
-    </header>
+  <main class="wrap">
+    <!-- ============ FAVORITOS ============ -->
+    <section class="sec" id="favoritos" aria-labelledby="h-fav">
+      <header class="sec-head">
+        <h2 id="h-fav">Mis carreras favoritas</h2>
+        <p>Revisá y gestioná las carreras que te interesan. Marcá dos o más para compararlas lado a lado.</p>
+      </header>
 
-    <div class="gate" id="favGate" hidden>
-      <svg class="i" aria-hidden="true"><use href="#i-heart"/></svg>
-      <h3>Ingresá para ver tus favoritas</h3>
-      <p>Tus carreras guardadas se asocian a tu cuenta, así las encontrás desde cualquier dispositivo.</p>
-      <a class="btn btn-primary" href="login.html?next=favoritos.html">Ingresar o crear cuenta</a>
-    </div>
-    <div class="gate" id="favEmpty" hidden>
-      <svg class="i" aria-hidden="true"><use href="#i-heart"/></svg>
-      <h3>Todavía no guardaste carreras</h3>
-      <p>Tocá el corazón en cualquier carrera para sumarla acá.</p>
-      <a class="btn btn-primary" href="index.html#resultados">Explorar carreras</a>
-    </div>
-    <div class="fav-grid" id="favGrid">
+      <div class="gate" id="favGate" hidden>
+        <svg class="i" aria-hidden="true">
+          <use href="#i-heart" />
+        </svg>
+        <h3>Ingresá para ver tus favoritas</h3>
+        <p>Tus carreras guardadas se asocian a tu cuenta, así las encontrás desde cualquier dispositivo.</p>
+        <a class="btn btn-primary" href="login.html?next=favoritos.html">Ingresar o crear cuenta</a>
+      </div>
+      <div class="gate" id="favEmpty" hidden>
+        <svg class="i" aria-hidden="true">
+          <use href="#i-heart" />
+        </svg>
+        <h3>Todavía no guardaste carreras</h3>
+        <p>Tocá el corazón en cualquier carrera para sumarla acá.</p>
+        <a class="btn btn-primary" href="index.html#resultados">Explorar carreras</a>
+      </div>
+      <!-- <div class="fav-grid" id="favGrid"> -->
+      <div class="fav-grid" id="favGrid"></div>
       <article class="fav t-presencial" data-fav="Ingeniería en Sistemas">
-        <div class="fav-top"><div class="ficha sm free"><b>5</b><span>años</span></div><button class="btn-icon" type="button" aria-label="Quitar Ingeniería en Sistemas de favoritos"><svg class="i"><use href="#i-x"/></svg></button></div>
-        <h3>Ingeniería en Sistemas</h3><p class="uni">UNLaM</p>
-        <div class="chips"><span class="chip">Ingeniería</span><span class="chip mod">Presencial</span><span class="chip gratis">Gratuita</span></div>
-        <p class="desc">Desarrollo de soluciones tecnológicas: programación, bases de datos, redes y seguridad informática.</p>
+        <div class="fav-top">
+          <div class="ficha sm free"><b>5</b><span>años</span></div><button class="btn-icon" type="button"
+            aria-label="Quitar Ingeniería en Sistemas de favoritos"><svg class="i">
+              <use href="#i-x" />
+            </svg></button>
+        </div>
+        <h3>Ingeniería en Sistemas</h3>
+        <p class="uni">UNLaM</p>
+        <div class="chips"><span class="chip">Ingeniería</span><span class="chip mod">Presencial</span><span
+            class="chip gratis">Gratuita</span></div>
+        <p class="desc">Desarrollo de soluciones tecnológicas: programación, bases de datos, redes y seguridad
+          informática.</p>
         <label class="cmp"><input type="checkbox" id="cmp1" checked>Incluir en la comparación</label>
-        <div class="fav-act"><a class="btn btn-primary" href="index.html#detalle">Ver detalle</a><button class="btn btn-ghost" type="button"><svg class="i"><use href="#i-phone"/></svg>Contacto</button></div>
+        <div class="fav-act"><a class="btn btn-primary" href="index.html#detalle">Ver detalle</a><button
+            class="btn btn-ghost" type="button"><svg class="i">
+              <use href="#i-phone" />
+            </svg>Contacto</button></div>
       </article>
 
       <article class="fav t-virtual" data-fav="Administración de Empresas">
-        <div class="fav-top"><div class="ficha sm"><b>4</b><span>años</span></div><button class="btn-icon" type="button" aria-label="Quitar Administración de Empresas de favoritos"><svg class="i"><use href="#i-x"/></svg></button></div>
-        <h3>Administración de Empresas</h3><p class="uni">UNQ</p>
-        <div class="chips"><span class="chip">Licenciatura</span><span class="chip mod">Virtual</span><span class="chip">Arancelada</span></div>
-        <p class="desc">Gestión empresarial, finanzas, recursos humanos y estrategia comercial. Ideal para emprender.</p>
+        <div class="fav-top">
+          <div class="ficha sm"><b>4</b><span>años</span></div><button class="btn-icon" type="button"
+            aria-label="Quitar Administración de Empresas de favoritos"><svg class="i">
+              <use href="#i-x" />
+            </svg></button>
+        </div>
+        <h3>Administración de Empresas</h3>
+        <p class="uni">UNQ</p>
+        <div class="chips"><span class="chip">Licenciatura</span><span class="chip mod">Virtual</span><span
+            class="chip">Arancelada</span></div>
+        <p class="desc">Gestión empresarial, finanzas, recursos humanos y estrategia comercial. Ideal para emprender.
+        </p>
         <label class="cmp"><input type="checkbox" id="cmp2" checked>Incluir en la comparación</label>
-        <div class="fav-act"><a class="btn btn-primary" href="index.html#detalle">Ver detalle</a><button class="btn btn-ghost" type="button"><svg class="i"><use href="#i-phone"/></svg>Contacto</button></div>
+        <div class="fav-act"><a class="btn btn-primary" href="index.html#detalle">Ver detalle</a><button
+            class="btn btn-ghost" type="button"><svg class="i">
+              <use href="#i-phone" />
+            </svg>Contacto</button></div>
       </article>
 
       <article class="fav t-semi" data-fav="Tecnicatura en Programación">
-        <div class="fav-top"><div class="ficha sm free"><b>2</b><span>años</span></div><button class="btn-icon" type="button" aria-label="Quitar Tecnicatura en Programación de favoritos"><svg class="i"><use href="#i-x"/></svg></button></div>
-        <h3>Tecnicatura en Programación</h3><p class="uni">UTN, Avellaneda</p>
-        <div class="chips"><span class="chip">Tecnicatura</span><span class="chip mod">Semipresencial</span><span class="chip gratis">Gratuita</span></div>
+        <div class="fav-top">
+          <div class="ficha sm free"><b>2</b><span>años</span></div><button class="btn-icon" type="button"
+            aria-label="Quitar Tecnicatura en Programación de favoritos"><svg class="i">
+              <use href="#i-x" />
+            </svg></button>
+        </div>
+        <h3>Tecnicatura en Programación</h3>
+        <p class="uni">UTN, Avellaneda</p>
+        <div class="chips"><span class="chip">Tecnicatura</span><span class="chip mod">Semipresencial</span><span
+            class="chip gratis">Gratuita</span></div>
         <p class="desc">Programación aplicada en dos años, con clases presenciales semanales y el resto en línea.</p>
         <label class="cmp"><input type="checkbox" id="cmp3" checked>Incluir en la comparación</label>
-        <div class="fav-act"><a class="btn btn-primary" href="index.html#detalle">Ver detalle</a><button class="btn btn-ghost" type="button"><svg class="i"><use href="#i-phone"/></svg>Contacto</button></div>
+        <div class="fav-act"><a class="btn btn-primary" href="index.html#detalle">Ver detalle</a><button
+            class="btn btn-ghost" type="button"><svg class="i">
+              <use href="#i-phone" />
+            </svg>Contacto</button></div>
       </article>
 
       <article class="fav t-presencial" data-fav="Licenciatura en Enfermería">
-        <div class="fav-top"><div class="ficha sm free"><b>3</b><span>años</span></div><button class="btn-icon" type="button" aria-label="Quitar Licenciatura en Enfermería de favoritos"><svg class="i"><use href="#i-x"/></svg></button></div>
-        <h3>Licenciatura en Enfermería</h3><p class="uni">UBA</p>
-        <div class="chips"><span class="chip">Licenciatura</span><span class="chip mod">Presencial</span><span class="chip gratis">Gratuita</span></div>
+        <div class="fav-top">
+          <div class="ficha sm free"><b>3</b><span>años</span></div><button class="btn-icon" type="button"
+            aria-label="Quitar Licenciatura en Enfermería de favoritos"><svg class="i">
+              <use href="#i-x" />
+            </svg></button>
+        </div>
+        <h3>Licenciatura en Enfermería</h3>
+        <p class="uni">UBA</p>
+        <div class="chips"><span class="chip">Licenciatura</span><span class="chip mod">Presencial</span><span
+            class="chip gratis">Gratuita</span></div>
         <p class="desc">Atención integral del paciente, investigación y gestión sanitaria. Alta demanda laboral.</p>
         <label class="cmp"><input type="checkbox" id="cmp4">Incluir en la comparación</label>
-        <div class="fav-act"><a class="btn btn-primary" href="index.html#detalle">Ver detalle</a><button class="btn btn-ghost" type="button"><svg class="i"><use href="#i-phone"/></svg>Contacto</button></div>
+        <div class="fav-act"><a class="btn btn-primary" href="index.html#detalle">Ver detalle</a><button
+            class="btn btn-ghost" type="button"><svg class="i">
+              <use href="#i-phone" />
+            </svg>Contacto</button></div>
       </article>
-    </div>
+      </div>
 
-    <div class="bar-actions">
-      <a class="btn btn-primary" id="cmpBtn" href="#comparar">Comparar seleccionadas (3)</a>
-      <button class="btn btn-ghost" type="button">Descargar lista</button>
-      <button class="btn btn-ghost" type="button">Compartir con mi familia</button>
-    </div>
-  </section>
+      <div class="bar-actions">
+        <a class="btn btn-primary" id="cmpBtn" href="#comparar">Comparar seleccionadas (3)</a>
+        <button class="btn btn-ghost" type="button">Descargar lista</button>
+        <button class="btn btn-ghost" type="button">Compartir con mi familia</button>
+      </div>
+    </section>
 
-  <!-- ============ COMPARACIÓN ============ -->
-  <section class="sec" id="comparar" aria-labelledby="h-cmp">
-    <header class="sec-head">
-      <h2 id="h-cmp">Comparación de carreras</h2>
-      <p>Tres carreras lado a lado. Cada color es la modalidad de la carrera.</p>
-    </header>
+    <!-- ============ COMPARACIÓN ============ -->
+    <section class="sec" id="comparar" aria-labelledby="h-cmp">
+      <header class="sec-head">
+        <h2 id="h-cmp">Comparación de carreras</h2>
+        <p>Tres carreras lado a lado. Cada color es la modalidad de la carrera.</p>
+      </header>
 
-    <ul class="cmp-legend" id="cmpLegend"></ul>
-    <div class="charts" id="charts"></div>
+      <!-- <ul class="cmp-legend" id="cmpLegend"></ul>
+    <div class="charts" id="charts"></div> -->
+      <div class="cmp-layout">
+        <ul class="cmp-legend" id="cmpLegend"></ul>
+        <div class="charts" id="charts"></div>
+      </div>
 
-    <div class="table-scroll">
-      <table class="cmp-table">
-        <thead>
-          <tr>
-            <th scope="col">Aspecto</th>
-            <th scope="col" class="t-presencial"><span class="sw"></span>Ingeniería en Sistemas<span>UNLaM</span></th>
-            <th scope="col" class="t-virtual"><span class="sw"></span>Administración de Empresas<span>UNQ</span></th>
-            <th scope="col" class="t-semi"><span class="sw"></span>Tecnicatura en Programación<span>UTN Avellaneda</span></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><th scope="row">Tipo de carrera</th><td>Ingeniería</td><td>Licenciatura</td><td>Tecnicatura</td></tr>
-          <tr><th scope="row">Modalidad</th><td class="t-presencial"><span class="chip mod">Presencial</span></td><td class="t-virtual"><span class="chip mod">Virtual</span></td><td class="t-semi"><span class="chip mod">Semipresencial</span></td></tr>
-          <tr><th scope="row">Duración</th><td>5 años</td><td>4 años</td><td>2 años</td></tr>
-          <tr><th scope="row">Costo</th><td><span class="chip gratis">Gratuita</span></td><td><span class="chip">Arancelada</span></td><td><span class="chip gratis">Gratuita</span></td></tr>
-          <tr><th scope="row">Ubicación</th><td>San Justo</td><td>A distancia</td><td>Avellaneda</td></tr>
-          <tr><th scope="row">Requisitos de ingreso</th><td>Secundario</td><td>Secundario</td><td>Secundario + seminario de ingreso</td></tr>
-          <tr><th scope="row">Demanda laboral</th><td>Muy alta</td><td>Alta</td><td>Muy alta</td></tr>
-          <tr><th scope="row">Salario inicial*</th><td>$45–55k</td><td>$35–45k</td><td>$40–50k</td></tr>
-          <tr><th scope="row">Plan de estudios</th><td>Técnico y teórico</td><td>Empresarial</td><td>Programación aplicada</td></tr>
-          <tr><th scope="row">Posgrado</th><td>Sí</td><td>Sí</td><td>Con ciclo de licenciatura</td></tr>
-          <tr><th scope="row">Trabajo remoto</th><td>Posible</td><td>Posible</td><td>Posible</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="note">*Salarios estimados según datos de mercado. Pueden variar según experiencia, especialización y empresa.</p>
+      <!-- <div class="table-scroll">
+        <table class="cmp-table">
+          <thead>
+            <tr>
+              <th scope="col">Aspecto</th>
+              <th scope="col" class="t-presencial"><span class="sw"></span>Ingeniería en Sistemas<span>UNLaM</span></th>
+              <th scope="col" class="t-virtual"><span class="sw"></span>Administración de Empresas<span>UNQ</span></th>
+              <th scope="col" class="t-semi"><span class="sw"></span>Tecnicatura en Programación<span>UTN
+                  Avellaneda</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Tipo de carrera</th>
+              <td>Ingeniería</td>
+              <td>Licenciatura</td>
+              <td>Tecnicatura</td>
+            </tr>
+            <tr>
+              <th scope="row">Modalidad</th>
+              <td class="t-presencial"><span class="chip mod">Presencial</span></td>
+              <td class="t-virtual"><span class="chip mod">Virtual</span></td>
+              <td class="t-semi"><span class="chip mod">Semipresencial</span></td>
+            </tr>
+            <tr>
+              <th scope="row">Duración</th>
+              <td>5 años</td>
+              <td>4 años</td>
+              <td>2 años</td>
+            </tr>
+            <tr>
+              <th scope="row">Costo</th>
+              <td><span class="chip gratis">Gratuita</span></td>
+              <td><span class="chip">Arancelada</span></td>
+              <td><span class="chip gratis">Gratuita</span></td>
+            </tr>
+            <tr>
+              <th scope="row">Ubicación</th>
+              <td>San Justo</td>
+              <td>A distancia</td>
+              <td>Avellaneda</td>
+            </tr>
+            <tr>
+              <th scope="row">Requisitos de ingreso</th>
+              <td>Secundario</td>
+              <td>Secundario</td>
+              <td>Secundario + seminario de ingreso</td>
+            </tr>
+            <tr>
+              <th scope="row">Demanda laboral</th>
+              <td>Muy alta</td>
+              <td>Alta</td>
+              <td>Muy alta</td>
+            </tr>
+            <tr>
+              <th scope="row">Salario inicial*</th>
+              <td>$45–55k</td>
+              <td>$35–45k</td>
+              <td>$40–50k</td>
+            </tr>
+            <tr>
+              <th scope="row">Plan de estudios</th>
+              <td>Técnico y teórico</td>
+              <td>Empresarial</td>
+              <td>Programación aplicada</td>
+            </tr>
+            <tr>
+              <th scope="row">Posgrado</th>
+              <td>Sí</td>
+              <td>Sí</td>
+              <td>Con ciclo de licenciatura</td>
+            </tr>
+            <tr>
+              <th scope="row">Trabajo remoto</th>
+              <td>Posible</td>
+              <td>Posible</td>
+              <td>Posible</td>
+            </tr>
+          </tbody>
+        </table>
+      </div> -->
+      <div class="table-scroll" id="cmpTableWrap">
+        <table class="cmp-table" id="cmpTable"></table>
+      </div>
+      <!-- <p class="note">*Salarios estimados según datos de mercado. Pueden variar según experiencia, especialización y
+        empresa.</p> -->
+      <p class="note">“Las carreras que tildes, lado a lado. Cada tono de azul identifica una carrera.”</p>
+      <div class="bar-actions">
+        <button class="btn btn-primary" type="button">Guardar comparación</button>
+        <button class="btn btn-ghost" type="button">Descargar PDF</button>
+        <button class="btn btn-ghost" type="button">Enviar por email</button>
+        <a class="btn btn-ghost" href="#favoritos">Volver a favoritos</a>
+      </div>
+    </section>
+  </main>
 
-    <div class="bar-actions">
-      <button class="btn btn-primary" type="button">Guardar comparación</button>
-      <button class="btn btn-ghost" type="button">Descargar PDF</button>
-      <button class="btn btn-ghost" type="button">Enviar por email</button>
-      <a class="btn btn-ghost" href="#favoritos">Volver a favoritos</a>
-    </div>
-  </section>
-</main>
+  <footer>
+    <div class="wrap">MiCarrera. Prototipo de alta fidelidad con datos de ejemplo.</div>
+  </footer>
 
-<footer><div class="wrap">MiCarrera. Prototipo de alta fidelidad con datos de ejemplo.</div></footer>
+  <!-- <script src="assets/js/auth.js"></script>
+  <script src="assets/js/micarrera.js"></script> -->
+  <script src="../MiCarrera_TP_Final/assets/js/catalogo.js"></script>
+  <script src="../MiCarrera_TP_Final/assets/js/auth.js"></script>
+  <script src="../MiCarrera_TP_Final/assets/js/micarrera.js"></script>
+  <script src="../MiCarrera_TP_Final/assets/js/favoritos.js"></script>
 
-<script src="assets/js/auth.js"></script>
-<script src="assets/js/micarrera.js"></script>
 </body>
+
 </html>

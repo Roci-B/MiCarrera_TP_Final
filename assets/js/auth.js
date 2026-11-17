@@ -1,29 +1,29 @@
 /* Sesión y favoritos simulados con localStorage (prototipo, sin servidor). */
 (() => {
-  const K = {users: 'micarrera-users', session: 'micarrera-sesion', favs: 'micarrera-favs'};
-  const DEMO = {name: 'Camila', email: 'demo@micarrera.ar', pass: 'micarrera1'};
+  const K = { users: 'micarrera-users', session: 'micarrera-sesion', favs: 'micarrera-favs' };
+  const DEMO = { name: 'Camila', email: 'demo@micarrera.ar', pass: 'micarrera1' };
   const SEED = ['Ingeniería en Sistemas', 'Administración de Empresas', 'Tecnicatura en Programación', 'Licenciatura en Enfermería'];
   const read = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch (e) { return d; } };
-  const write = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+  const write = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { } };
   const $$ = (sel, r = document) => [...r.querySelectorAll(sel)];
 
   const users = () => { const u = read(K.users, []); return u.some(x => x.email === DEMO.email) ? u : [DEMO, ...u]; };
   const user = () => read(K.session, null);
   const favs = () => read(K.favs, {})[user()?.email] || [];
-  const setFavs = list => write(K.favs, {...read(K.favs, {}), [user().email]: list});
+  const setFavs = list => write(K.favs, { ...read(K.favs, {}), [user().email]: list });
 
   function login(u) {
-    write(K.session, {name: u.name, email: u.email});
+    write(K.session, { name: u.name, email: u.email });
     if (!(u.email in read(K.favs, {}))) setFavs(SEED);
   }
   function register(name, email, pass) {
     const all = users();
     if (all.some(x => x.email === email)) return false;
-    write(K.users, [...all, {name, email, pass}]);
-    login({name, email});
+    write(K.users, [...all, { name, email, pass }]);
+    login({ name, email });
     return true;
   }
-  const logout = () => { try { localStorage.removeItem(K.session); } catch (e) {} };
+  const logout = () => { try { localStorage.removeItem(K.session); } catch (e) { } };
 
   /* ---------- aviso (alerta) ---------- */
   let toast, timer;
@@ -46,6 +46,7 @@
 
   /* ---------- sincronizar interfaz ---------- */
   function syncFavs() {
+    document.dispatchEvent(new Event('mc:favs'));
     const mine = favs(), on = !!user();
     $$('.fav-toggle[data-fav]').forEach(b => {
       const saved = on && mine.includes(b.dataset.fav);
@@ -80,7 +81,7 @@
     if (!b) return;
     const name = b.dataset.fav || b.closest('[data-fav]')?.dataset.fav;
     if (!user()) {
-      notify('Iniciá sesión para guardar carreras en tus favoritos.', {href: `login.html?next=${location.pathname.split('/').pop() || 'index.html'}`, label: 'Ingresar'});
+      notify('Iniciá sesión para guardar carreras en tus favoritos.', { href: `login.html?next=${location.pathname.split('/').pop() || 'index.html'}`, label: 'Ingresar' });
       return;
     }
     const mine = favs();
@@ -88,6 +89,6 @@
     syncFavs();
   });
 
-  window.MC = {user, login, register, users, notify, syncFavs, syncAuth};
+  window.MC = { user, favs, login, register, users, notify, syncFavs, syncAuth };
   syncAuth(); syncFavs();
 })();
