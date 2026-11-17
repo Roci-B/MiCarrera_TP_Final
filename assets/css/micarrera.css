@@ -15,13 +15,6 @@ img {
   padding-bottom: env(safe-area-inset-bottom, 0px)
 }
 
-/* barras de comparación: paleta monocromática en azul */
-:root {
-  --bar-0: #2E6FD8;
-  --bar-1: #5F95E8;
-  --bar-2: #94B8F2
-}
-
 /* Layout: una columna de 1200px alineada a la izquierda. El hero es un escenario de color (la carrera activa) + el ranking de las 6 más consultadas.
    El color de cada carrera indica la modalidad; el amarillo "resaltador" marca las gratuitas. */
 :root {
@@ -1484,11 +1477,6 @@ main.wrap {
   align-items: start
 }
 
-.cmp-layout .cmp-legend {
-  position: static;
-  max-height: calc(100vh - 104px);
-  overflow-y: auto
-}
 
 .cmp-legend li:has(input:not(:checked)) {
   opacity: .55
@@ -1513,7 +1501,9 @@ main.wrap {
 .cmp-layout .cmp-legend {
   grid-template-columns: minmax(0, 1fr);
   position: sticky;
-  top: 84px
+  top: 84px;
+  max-height: calc(100vh - 104px);
+  overflow-y: auto
 }
 
 .cmp-layout .charts {

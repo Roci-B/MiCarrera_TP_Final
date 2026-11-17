@@ -155,86 +155,7 @@
         <p>Tocá el corazón en cualquier carrera para sumarla acá.</p>
         <a class="btn btn-primary" href="index.html#resultados">Explorar carreras</a>
       </div>
-      <!-- <div class="fav-grid" id="favGrid"> -->
       <div class="fav-grid" id="favGrid"></div>
-      <!-- <article class="fav t-presencial" data-fav="Ingeniería en Sistemas">
-        <div class="fav-top">
-          <div class="ficha sm free"><b>5</b><span>años</span></div><button class="btn-icon" type="button"
-            aria-label="Quitar Ingeniería en Sistemas de favoritos"><svg class="i">
-              <use href="#i-x" />
-            </svg></button>
-        </div>
-        <h3>Ingeniería en Sistemas</h3>
-        <p class="uni">UNLaM</p>
-        <div class="chips"><span class="chip">Ingeniería</span><span class="chip mod">Presencial</span><span
-            class="chip gratis">Gratuita</span></div>
-        <p class="desc">Desarrollo de soluciones tecnológicas: programación, bases de datos, redes y seguridad
-          informática.</p>
-        <label class="cmp"><input type="checkbox" id="cmp1" checked>Incluir en la comparación</label>
-        <div class="fav-act"><a class="btn btn-primary" href="index.html#detalle">Ver detalle</a><button
-            class="btn btn-ghost" type="button"><svg class="i">
-              <use href="#i-phone" />
-            </svg>Contacto</button></div>
-      </article>
-
-      <article class="fav t-virtual" data-fav="Administración de Empresas">
-        <div class="fav-top">
-          <div class="ficha sm"><b>4</b><span>años</span></div><button class="btn-icon" type="button"
-            aria-label="Quitar Administración de Empresas de favoritos"><svg class="i">
-              <use href="#i-x" />
-            </svg></button>
-        </div>
-        <h3>Administración de Empresas</h3>
-        <p class="uni">UNQ</p>
-        <div class="chips"><span class="chip">Licenciatura</span><span class="chip mod">Virtual</span><span
-            class="chip">Arancelada</span></div>
-        <p class="desc">Gestión empresarial, finanzas, recursos humanos y estrategia comercial. Ideal para emprender.
-        </p>
-        <label class="cmp"><input type="checkbox" id="cmp2" checked>Incluir en la comparación</label>
-        <div class="fav-act"><a class="btn btn-primary" href="index.html#detalle">Ver detalle</a><button
-            class="btn btn-ghost" type="button"><svg class="i">
-              <use href="#i-phone" />
-            </svg>Contacto</button></div>
-      </article>
-
-      <article class="fav t-semi" data-fav="Tecnicatura en Programación">
-        <div class="fav-top">
-          <div class="ficha sm free"><b>2</b><span>años</span></div><button class="btn-icon" type="button"
-            aria-label="Quitar Tecnicatura en Programación de favoritos"><svg class="i">
-              <use href="#i-x" />
-            </svg></button>
-        </div>
-        <h3>Tecnicatura en Programación</h3>
-        <p class="uni">UTN, Avellaneda</p>
-        <div class="chips"><span class="chip">Tecnicatura</span><span class="chip mod">Semipresencial</span><span
-            class="chip gratis">Gratuita</span></div>
-        <p class="desc">Programación aplicada en dos años, con clases presenciales semanales y el resto en línea.</p>
-        <label class="cmp"><input type="checkbox" id="cmp3" checked>Incluir en la comparación</label>
-        <div class="fav-act"><a class="btn btn-primary" href="index.html#detalle">Ver detalle</a><button
-            class="btn btn-ghost" type="button"><svg class="i">
-              <use href="#i-phone" />
-            </svg>Contacto</button></div>
-      </article>
-
-      <article class="fav t-presencial" data-fav="Licenciatura en Enfermería">
-        <div class="fav-top">
-          <div class="ficha sm free"><b>3</b><span>años</span></div><button class="btn-icon" type="button"
-            aria-label="Quitar Licenciatura en Enfermería de favoritos"><svg class="i">
-              <use href="#i-x" />
-            </svg></button>
-        </div>
-        <h3>Licenciatura en Enfermería</h3>
-        <p class="uni">UBA</p>
-        <div class="chips"><span class="chip">Licenciatura</span><span class="chip mod">Presencial</span><span
-            class="chip gratis">Gratuita</span></div>
-        <p class="desc">Atención integral del paciente, investigación y gestión sanitaria. Alta demanda laboral.</p>
-        <label class="cmp"><input type="checkbox" id="cmp4">Incluir en la comparación</label>
-        <div class="fav-act"><a class="btn btn-primary" href="index.html#detalle">Ver detalle</a><button
-            class="btn btn-ghost" type="button"><svg class="i">
-              <use href="#i-phone" />
-            </svg>Contacto</button></div>
-      </article>
-      </div> -->
 
       <div class="bar-actions">
         <a class="btn btn-primary" id="cmpBtn" href="#comparar">Comparar seleccionadas (3)</a>
@@ -247,103 +168,18 @@
     <section class="sec" id="comparar" aria-labelledby="h-cmp">
       <header class="sec-head">
         <h2 id="h-cmp">Comparación de carreras</h2>
-        <p>Tres carreras lado a lado. Cada color es la modalidad de la carrera.</p>
+        <p>Las carreras que tildes, lado a lado. Cada color identifica una carrera.</p>
       </header>
 
-      <!-- <ul class="cmp-legend" id="cmpLegend"></ul>
-    <div class="charts" id="charts"></div> -->
       <div class="cmp-layout">
         <ul class="cmp-legend" id="cmpLegend"></ul>
         <div class="charts" id="charts"></div>
       </div>
 
-      <!-- <div class="table-scroll">
-        <table class="cmp-table">
-          <thead>
-            <tr>
-              <th scope="col">Aspecto</th>
-              <th scope="col" class="t-presencial"><span class="sw"></span>Ingeniería en Sistemas<span>UNLaM</span></th>
-              <th scope="col" class="t-virtual"><span class="sw"></span>Administración de Empresas<span>UNQ</span></th>
-              <th scope="col" class="t-semi"><span class="sw"></span>Tecnicatura en Programación<span>UTN
-                  Avellaneda</span></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Tipo de carrera</th>
-              <td>Ingeniería</td>
-              <td>Licenciatura</td>
-              <td>Tecnicatura</td>
-            </tr>
-            <tr>
-              <th scope="row">Modalidad</th>
-              <td class="t-presencial"><span class="chip mod">Presencial</span></td>
-              <td class="t-virtual"><span class="chip mod">Virtual</span></td>
-              <td class="t-semi"><span class="chip mod">Semipresencial</span></td>
-            </tr>
-            <tr>
-              <th scope="row">Duración</th>
-              <td>5 años</td>
-              <td>4 años</td>
-              <td>2 años</td>
-            </tr>
-            <tr>
-              <th scope="row">Costo</th>
-              <td><span class="chip gratis">Gratuita</span></td>
-              <td><span class="chip">Arancelada</span></td>
-              <td><span class="chip gratis">Gratuita</span></td>
-            </tr>
-            <tr>
-              <th scope="row">Ubicación</th>
-              <td>San Justo</td>
-              <td>A distancia</td>
-              <td>Avellaneda</td>
-            </tr>
-            <tr>
-              <th scope="row">Requisitos de ingreso</th>
-              <td>Secundario</td>
-              <td>Secundario</td>
-              <td>Secundario + seminario de ingreso</td>
-            </tr>
-            <tr>
-              <th scope="row">Demanda laboral</th>
-              <td>Muy alta</td>
-              <td>Alta</td>
-              <td>Muy alta</td>
-            </tr>
-            <tr>
-              <th scope="row">Salario inicial*</th>
-              <td>$45–55k</td>
-              <td>$35–45k</td>
-              <td>$40–50k</td>
-            </tr>
-            <tr>
-              <th scope="row">Plan de estudios</th>
-              <td>Técnico y teórico</td>
-              <td>Empresarial</td>
-              <td>Programación aplicada</td>
-            </tr>
-            <tr>
-              <th scope="row">Posgrado</th>
-              <td>Sí</td>
-              <td>Sí</td>
-              <td>Con ciclo de licenciatura</td>
-            </tr>
-            <tr>
-              <th scope="row">Trabajo remoto</th>
-              <td>Posible</td>
-              <td>Posible</td>
-              <td>Posible</td>
-            </tr>
-          </tbody>
-        </table>
-      </div> -->
       <div class="table-scroll" id="cmpTableWrap">
         <table class="cmp-table" id="cmpTable"></table>
       </div>
-      <!-- <p class="note">*Salarios estimados según datos de mercado. Pueden variar según experiencia, especialización y
-        empresa.</p> -->
-      <p class="note">“Las carreras que tildes, lado a lado. Cada tono de azul identifica una carrera.”</p>
+      <p class="note">*Salarios estimados según datos de mercado. Pueden variar según experiencia, especialización y empresa.</p>
       <div class="bar-actions">
         <button class="btn btn-primary" type="button">Guardar comparación</button>
         <button class="btn btn-ghost" type="button">Descargar PDF</button>
@@ -357,12 +193,10 @@
     <div class="wrap">MiCarrera. Prototipo de alta fidelidad con datos de ejemplo.</div>
   </footer>
 
-  <!-- <script src="assets/js/auth.js"></script>
-  <script src="assets/js/micarrera.js"></script> -->
-  <script src="../MiCarrera_TP_Final/assets/js/catalogo.js"></script>
-  <script src="../MiCarrera_TP_Final/assets/js/auth.js"></script>
-  <script src="../MiCarrera_TP_Final/assets/js/micarrera.js"></script>
-  <script src="../MiCarrera_TP_Final/assets/js/favoritos.js"></script>
+  <script src="assets/js/catalogo.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/micarrera.js"></script>
+  <script src="assets/js/favoritos.js"></script>
 
 </body>
 
