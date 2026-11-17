@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiCarrera - Diseño de Alta Fidelidad</title>
+    <link rel="stylesheet" href="../css/2_DiseñoAltaFidelidad_Home_Resultados_Detalle.css">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <!-- ============ NAVBAR ============ -->
+    <div class="navbar">
+        <div class="navbar-content">
+            <div class="navbar-logo">MiCarrera</div>
+            <div class="navbar-nav">
+                <a href="#home">Inicio</a>
+                <a href="#carreras">Carreras</a>
+                <a href="#universidades">Universidades</a>
+                <a href="#ayuda">Ayuda</a>
+            </div>
+            <div class="navbar-actions">
+                <a href="#" class="btn-outline">Favoritos</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- ============ HOME SECTION ============ -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Encuentra tu carrera ideal</h1>
+                <p>Explora miles de carreras universitarias en Argentina. Compara, filtra y elige la mejor opción para
+                    tu futuro profesional.</p>
+
+                <div class="search-section">
+                    <div class="search-box">
+                        <input type="text" placeholder="Buscar carrera, área de estudio...">
+                        <button>Buscar</button>
+                    </div>
+
+                    <div class="filter-row">
+                        <div class="filter-item">
+                            <label>Área de Estudio</label>
+                            <select>
+                                <option>Todas</option>
+                                <option>Ingeniería</option>
+                                <option>Salud</option>
+                                <option>Humanidades</option>
+                            </select>
+                        </div>
+                        <div class="filter-item">
+                            <label>Modalidad</label>
+                            <select>
+                                <option>Todas</option>
+                                <option>Presencial</option>
+                                <option>Virtual</option>
+                                <option>Híbrida</option>
+                            </select>
+                        </div>
+                        <div class="filter-item">
+                            <label>Costo</label>
+                            <select>
+                                <option>Todos</option>
+                                <option>Gratuito</option>
+                                <option>Pago</option>
+                            </select>
+                        </div>
+                        <div class="filter-item">
+                            <label>Duración</label>
+                            <select>
+                                <option>Todas</option>
+                                <option>2-3 años</option>
+                                <option>4-5 años</option>
+                                <option>6+ años</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ FEATURED SECTION ============ -->
+        <section class="featured-section">
+            <h2 class="section-title">📌 Carreras Destacadas</h2>
+            <div class="featured-grid">
+                <div class="featured-card">
+                    <div class="card-icon">💻</div>
+                    <h4>Ingeniería en Sistemas</h4>
+                    <p>Universidad Nacional de La Matanza</p>
+                    <div class="badge-row">
+                        <span class="badge">Presencial</span>
+                        <span class="badge">Gratuito</span>
+                        <span class="badge">5 años</span>
+                    </div>
+                </div>
+                <div class="featured-card">
+                    <div class="card-icon">⚕️</div>
+                    <h4>Licenciatura en Enfermería</h4>
+                    <p>Universidad de Buenos Aires</p>
+                    <div class="badge-row">
+                        <span class="badge">Presencial</span>
+                        <span class="badge">Gratuito</span>
+                        <span class="badge">3 años</span>
+                    </div>
+                </div>
+                <div class="featured-card">
+                    <div class="card-icon">📊</div>
+                    <h4>Administración de Empresas</h4>
+                    <p>Universidad de Quilmes</p>
+                    <div class="badge-row">
+                        <span class="badge">Virtual</span>
+                        <span class="badge">Pago</span>
+                        <span class="badge">4 años</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ RESULTADOS SECTION ============ -->
+        <div class="page-title">
+            <h2>Resultados de Búsqueda</h2>
+            <p>Mostrando carreras relacionadas con "Ingeniería"</p>
+        </div>
+
+        <section class="results-section">
+            <div class="filters-panel">
+                <div class="filter-group">
+                    <h3>Área</h3>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="f1">
+                        <label for="f1">Ingeniería</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="f2">
+                        <label for="f2">Salud</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="f3">
+                        <label for="f3">Humanidades</label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h3>Modalidad</h3>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="f4">
+                        <label for="f4">Presencial</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="f5">
+                        <label for="f5">Virtual</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="f6">
+                        <label for="f6">Híbrida</label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h3>Costo</h3>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="f7">
+                        <label for="f7">Gratuito</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="f8">
+                        <label for="f8">Pago</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results-list">
+                <div class="result-card">
+                    <div class="result-info">
+                        <h3>Ingeniería en Sistemas</h3>
+                        <div class="result-meta">
+                            <div class="meta-item">📍 UNLaM (San Justo)</div>
+                            <div class="meta-item">👥 500+ estudiantes</div>
+                        </div>
+                        <div class="badges">
+                            <span class="badge-small">Presencial</span>
+                            <span class="badge-small">Gratuito</span>
+                            <span class="badge-small">5 años</span>
+                        </div>
+                    </div>
+                    <div class="result-actions">
+                        <button class="btn-primary">Ver Detalle</button>
+                        <button class="btn-secondary">❤️</button>
+                    </div>
+                </div>
+
+                <div class="result-card">
+                    <div class="result-info">
+                        <h3>Ingeniería en Informática</h3>
+                        <div class="result-meta">
+                            <div class="meta-item">📍 UBA (Capital Federal)</div>
+                            <div class="meta-item">👥 800+ estudiantes</div>
+                        </div>
+                        <div class="badges">
+                            <span class="badge-small">Presencial</span>
+                            <span class="badge-small">Gratuito</span>
+                            <span class="badge-small">6 años</span>
+                        </div>
+                    </div>
+                    <div class="result-actions">
+                        <button class="btn-primary">Ver Detalle</button>
+                        <button class="btn-secondary">🤍</button>
+                    </div>
+                </div>
+
+                <div class="result-card">
+                    <div class="result-info">
+                        <h3>Ingeniería en Software</h3>
+                        <div class="result-meta">
+                            <div class="meta-item">📍 UNLP (La Plata)</div>
+                            <div class="meta-item">👥 350+ estudiantes</div>
+                        </div>
+                        <div class="badges">
+                            <span class="badge-small">Virtual</span>
+                            <span class="badge-small">Pago</span>
+                            <span class="badge-small">4 años</span>
+                        </div>
+                    </div>
+                    <div class="result-actions">
+                        <button class="btn-primary">Ver Detalle</button>
+                        <button class="btn-secondary">🤍</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ DETALLE SECTION ============ -->
+        <div class="page-title" style="margin-top: 80px;">
+            <h2>Detalle de Carrera</h2>
+            <p>Información completa para tomar la mejor decisión</p>
+        </div>
+
+        <div class="detail-header">
+            <h1>Ingeniería en Sistemas</h1>
+            <p>Universidad Nacional de La Matanza (UNLaM)</p>
+        </div>
+
+        <div class="detail-container">
+            <div class="detail-main">
+                <section class="detail-section">
+                    <h2>📋 Descripción</h2>
+                    <p>La Ingeniería en Sistemas es una carrera enfocada en la formación de profesionales capaces de
+                        diseñar, desarrollar e implementar soluciones tecnológicas integrales. Los estudiantes
+                        aprenderán programación, bases de datos, redes, seguridad informática y gestión de proyectos.
+                    </p>
+                </section>
+
+                <section class="detail-section">
+                    <h2>📚 Plan de Estudios</h2>
+                    <p>La carrera consta de 10 cuatrimestres distribuidos en 5 años. Incluye materias teóricas y
+                        prácticas, trabajos en equipo, proyectos integradores y una experiencia de pasantía profesional.
+                    </p>
+                </section>
+
+                <section class="detail-section">
+                    <h2>🎯 Requisitos de Anotación</h2>
+                    <ul class="detail-list">
+                        <li>Título de Educación Secundaria completo (o equivalente)</li>
+                        <li>Certificado de Identidad válido</li>
+                        <li>Formulario de inscripción completado</li>
+                        <li>No hay examen de ingreso</li>
+                        <li>Inscripción durante fechas de admisión establecidas</li>
+                    </ul>
+                </section>
+
+                <section class="detail-section">
+                    <h2>💼 Campo Laboral</h2>
+                    <p>Los egresados pueden trabajar en empresas de tecnología, bancos e instituciones financieras,
+                        organismos gubernamentales, consultorías, desarrollo de software o como profesionales
+                        independientes. La salida laboral es muy alta con perspectivas salariales competitivas.</p>
+                </section>
+
+                <section class="detail-section">
+                    <h2>🏆 Ventajas de esta Carrera</h2>
+                    <ul class="detail-list">
+                        <li>Carrera con demanda laboral muy alta en Argentina</li>
+                        <li>Perspectivas salariales competitivas y crecimiento profesional</li>
+                        <li>Posibilidad de continuar estudios de posgrado</li>
+                        <li>Oportunidades de trabajo remoto y freelance</li>
+                        <li>Comunidad activa de estudiantes y profesionales</li>
+                    </ul>
+                </section>
+            </div>
+
+            <div class="detail-sidebar">
+                <div class="info-block">
+                    <div class="info-label">Modalidad</div>
+                    <div class="info-value">Presencial</div>
+                </div>
+
+                <div class="info-block">
+                    <div class="info-label">Duración</div>
+                    <div class="info-value">5 años</div>
+                    <p style="color: var(--text-light); font-size: 0.9em; margin-top: 5px;">10 cuatrimestres</p>
+                </div>
+
+                <div class="info-block">
+                    <div class="info-label">Costo</div>
+                    <div class="info-value">Gratuito</div>
+                    <p style="color: var(--text-light); font-size: 0.9em; margin-top: 5px;">Universidad pública nacional
+                    </p>
+                </div>
+
+                <div class="info-block">
+                    <div class="info-label">Ubicación</div>
+                    <div class="info-value">San Justo</div>
+                    <p style="color: var(--text-light); font-size: 0.9em; margin-top: 5px;">La Matanza, Buenos Aires</p>
+                </div>
+
+                <div class="info-block">
+                    <div class="info-label">Estudiantes Activos</div>
+                    <div class="info-value">500+</div>
+                </div>
+
+                <button class="btn-large primary">📞 Contactar Universidad</button>
+                <button class="btn-large secondary">❤️ Agregar a Favoritos</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

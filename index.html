@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>MiCarrera - Inicio, resultados y detalle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&display=swap">
+    <link rel="stylesheet" href="assets/css/micarrera.css">
+    <script>try { const t = localStorage.getItem('micarrera-tema'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M9 6v12M15 6v12"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6-5.5-6-11a6 6 0 0 1 12 0c0 5.5-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0M16 5.2a3 3 0 0 1 0 5.6M17.5 14.2a5.5 5.5 0 0 1 3 4.8"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8v8M8 12h8"/></symbol>
+  <symbol id="i-laptop" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 19h20"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6"/></symbol>
+  <symbol id="i-mind" viewBox="0 0 24 24"><circle cx="12" cy="10" r="6"/><path d="M9 20h6M12 16v4M10 9a2 2 0 1 1 3 1.7c-.6.4-1 .8-1 1.3"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 3l6 6-6 12-6-12 6-6z"/><circle cx="12" cy="11" r="1.8"/><path d="M12 13v8"/></symbol>
+  <symbol id="i-bank" viewBox="0 0 24 24"><path d="M3 10h18L12 4 3 10zM5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/></symbol>
+  <symbol id="i-gov" viewBox="0 0 24 24"><path d="M4 20V9l8-5 8 5v11M9 20v-6h6v6M3 20h18"/></symbol>
+  <symbol id="i-cap" viewBox="0 0 24 24"><path d="m2 9 10-5 10 5-10 5L2 9z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></symbol>
+  <symbol id="i-door" viewBox="0 0 24 24"><path d="M6 20V4h9l3 2v14M3 20h18M12 12h.01"/></symbol>
+  <symbol id="i-trend" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></symbol>
+  <symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M14.8 9.3c-.6-.8-1.6-1.3-2.8-1.3-1.7 0-3 .9-3 2s1.3 1.7 3 2 3 .9 3 2-1.3 2-3 2c-1.3 0-2.4-.5-3-1.4M12 6.5V8M12 16v1.5"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-team" viewBox="0 0 24 24"><circle cx="12" cy="7" r="3"/><circle cx="5" cy="10" r="2.2"/><circle cx="19" cy="10" r="2.2"/><path d="M7 20a5 5 0 0 1 10 0M1.5 18a3.5 3.5 0 0 1 5-3.2M22.5 18a3.5 3.5 0 0 0-5-3.2"/></symbol>
+</svg>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="#inicio"><span class="logo-mark" aria-hidden="true"></span>MiCarrera</a>
+    <nav aria-label="Principal">
+      <a href="#inicio">Inicio</a>
+      <a href="#resultados">Carreras</a>
+      <a href="#detalle">Detalle</a>
+      <a href="favoritos.html#comparar">Comparar</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="btn-icon" id="themeToggle" type="button" aria-label="Cambiar a modo oscuro"><svg class="i"><use href="#i-moon"/></svg></button>
+      <a class="btn btn-ghost" href="favoritos.html#favoritos"><svg class="i"><use href="#i-heart"/></svg>Favoritos <span class="count" data-fav-count>0</span></a>
+      <a class="btn btn-primary" data-auth href="login.html">Ingresar</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- ============ HERO: carreras más consultadas ============ -->
+  <section class="hero" id="inicio" aria-labelledby="h-hero">
+    <div class="hero-head">
+      <h1 id="h-hero">Encontrá tu carrera ideal</h1>
+      <p>Explorá carreras universitarias del Área Metropolitana de Buenos Aires. Compará modalidad, costo y duración, y eligí la mejor opción para tu futuro.</p>
+    </div>
+
+    <div class="hero-grid" id="heroGrid">
+      <article class="stage t-presencial" id="stage" aria-roledescription="carrusel" aria-label="Carreras más consultadas">
+        <div class="stage-body" id="stageBody" aria-live="off"></div>
+        <div class="stage-ctrl">
+          <button class="ctrl" id="prev" type="button" aria-label="Carrera anterior"><svg class="i"><use href="#i-left"/></svg></button>
+          <span class="stage-pos" id="pos">1 de 6</span>
+          <button class="ctrl" id="next" type="button" aria-label="Carrera siguiente"><svg class="i"><use href="#i-right"/></svg></button>
+          <button class="ctrl" id="pause" type="button" aria-label="Pausar rotación"><svg class="i"><use href="#i-pause"/></svg></button>
+        </div>
+      </article>
+
+      <aside class="rank" aria-labelledby="h-rank">
+        <h2 class="rank-title" id="h-rank">Más consultadas este mes</h2>
+        <p class="rank-sub">Según búsquedas y visitas en MiCarrera</p>
+        <ol class="rank-list" id="rankList"></ol>
+      </aside>
+    </div>
+
+    <!-- búsqueda -->
+    <div class="search">
+      <form class="search-form" id="searchForm" role="search">
+        <div class="search-box">
+          <svg class="i"><use href="#i-search"/></svg>
+          <label class="sr-only" for="q">Buscar carrera, área o universidad</label>
+          <input id="q" type="search" placeholder="Buscar carrera, área de estudio o universidad" value="Informática">
+          <button class="btn btn-primary" type="submit">Buscar</button>
+        </div>
+        <div class="filter-row">
+          <div class="field"><label for="s-area">Área de estudio</label>
+            <select id="s-area"><option>Todas</option><option>Ingeniería y tecnología</option><option>Salud</option><option>Ciencias económicas</option><option>Humanidades</option><option>Diseño</option></select></div>
+          <div class="field"><label for="s-tipo">Tipo de carrera</label>
+            <select id="s-tipo"><option>Todos</option><option>Tecnicatura</option><option>Licenciatura</option><option>Ingeniería</option><option>Profesorado</option></select></div>
+          <div class="field"><label for="s-mod">Modalidad</label>
+            <select id="s-mod"><option>Todas</option><option>Presencial</option><option>Semipresencial</option><option>Virtual (a distancia)</option><option>Asincrónica</option></select></div>
+          <div class="field"><label for="s-cost">Costo</label>
+            <select id="s-cost"><option>Todos</option><option>Gratuita</option><option>Arancelada</option></select></div>
+          <div class="field"><label for="s-dur">Duración</label>
+            <select id="s-dur"><option>Todas</option><option>Hasta 3 años</option><option>4 a 5 años</option><option>6 años o más</option></select></div>
+        </div>
+      </form>
+      <div class="legend">
+        <p class="legend-title">Cómo leer los colores</p>
+        <ul>
+          <li class="t-presencial"><span class="sw"></span>Presencial</li>
+          <li class="t-semi"><span class="sw"></span>Semipresencial</li>
+          <li class="t-virtual"><span class="sw"></span>Virtual (a distancia)</li>
+          <li><span class="chip gratis">Gratuita</span>marcada en amarillo</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RESULTADOS ============ -->
+  <section class="sec" id="resultados" aria-labelledby="h-res">
+    <header class="sec-head">
+      <h2 id="h-res">Resultados de búsqueda</h2>
+      <p>Carreras relacionadas con “<span id="qEcho">Informática</span>”: <strong id="resCount">6 carreras</strong></p>
+    </header>
+
+    <div class="results">
+      <form class="filters" id="filters" aria-label="Filtrar resultados">
+        <fieldset>
+          <legend>Tipo de carrera</legend>
+          <label class="check"><input type="checkbox" name="tipo" value="tecnicatura" id="f-tec">Tecnicatura</label>
+          <label class="check"><input type="checkbox" name="tipo" value="licenciatura" id="f-lic">Licenciatura</label>
+          <label class="check"><input type="checkbox" name="tipo" value="ingenieria" id="f-ing">Ingeniería</label>
+          <label class="check"><input type="checkbox" name="tipo" value="profesorado" id="f-prof">Profesorado</label>
+        </fieldset>
+        <fieldset>
+          <legend>Modalidad</legend>
+          <label class="check t-presencial"><input type="checkbox" name="mod" value="presencial" id="f-pres"><span class="sw"></span>Presencial</label>
+          <label class="check t-semi"><input type="checkbox" name="mod" value="semi" id="f-semi"><span class="sw"></span>Semipresencial</label>
+          <label class="check t-virtual"><input type="checkbox" name="mod" value="virtual" id="f-virt"><span class="sw"></span>Virtual (a distancia)</label>
+        </fieldset>
+        <fieldset>
+          <legend>Costo</legend>
+          <label class="check"><input type="checkbox" name="cost" value="gratuita" id="f-grat"><span class="sw y"></span>Gratuita</label>
+          <label class="check"><input type="checkbox" name="cost" value="arancelada" id="f-aran">Arancelada</label>
+        </fieldset>
+        <button class="btn-text" type="reset">Quitar filtros</button>
+      </form>
+
+      <div class="res-list" id="resList">
+        <article class="res t-presencial" data-tipo="ingenieria" data-mod="presencial" data-cost="gratuita">
+          <div class="ficha free"><b>5</b><span>años</span></div>
+          <div class="res-main">
+            <h3>Ingeniería en Sistemas</h3>
+            <ul class="meta"><li><svg class="i"><use href="#i-pin"/></svg>UNLaM, San Justo</li><li><svg class="i"><use href="#i-users"/></svg>500+ estudiantes</li></ul>
+            <div class="chips"><span class="chip">Ingeniería</span><span class="chip mod">Presencial</span><span class="chip gratis">Gratuita</span></div>
+          </div>
+          <div class="res-act"><a class="btn btn-primary" href="#detalle">Ver detalle</a><button class="btn-icon fav-toggle" type="button" aria-pressed="false" data-fav="Ingeniería en Sistemas" aria-label="Guardar Ingeniería en Sistemas en favoritos"><svg class="i"><use href="#i-heart"/></svg></button></div>
+        </article>
+
+        <article class="res t-presencial" data-tipo="ingenieria" data-mod="presencial" data-cost="gratuita">
+          <div class="ficha free"><b>6</b><span>años</span></div>
+          <div class="res-main">
+            <h3>Ingeniería en Informática</h3>
+            <ul class="meta"><li><svg class="i"><use href="#i-pin"/></svg>UBA, Ciudad de Buenos Aires</li><li><svg class="i"><use href="#i-users"/></svg>800+ estudiantes</li></ul>
+            <div class="chips"><span class="chip">Ingeniería</span><span class="chip mod">Presencial</span><span class="chip gratis">Gratuita</span></div>
+          </div>
+          <div class="res-act"><a class="btn btn-primary" href="#detalle">Ver detalle</a><button class="btn-icon fav-toggle" type="button" aria-pressed="false" data-fav="Ingeniería en Informática" aria-label="Guardar Ingeniería en Informática en favoritos"><svg class="i"><use href="#i-heart"/></svg></button></div>
+        </article>
+
+        <article class="res t-semi" data-tipo="tecnicatura" data-mod="semi" data-cost="gratuita">
+          <div class="ficha free"><b>2</b><span>años</span></div>
+          <div class="res-main">
+            <h3>Tecnicatura Universitaria en Programación</h3>
+            <ul class="meta"><li><svg class="i"><use href="#i-pin"/></svg>UTN, Avellaneda</li><li><svg class="i"><use href="#i-users"/></svg>1.200+ estudiantes</li></ul>
+            <div class="chips"><span class="chip">Tecnicatura</span><span class="chip mod">Semipresencial</span><span class="chip gratis">Gratuita</span></div>
+          </div>
+          <div class="res-act"><a class="btn btn-primary" href="#detalle">Ver detalle</a><button class="btn-icon fav-toggle" type="button" aria-pressed="false" data-fav="Tecnicatura en Programación" aria-label="Guardar Tecnicatura Universitaria en Programación en favoritos"><svg class="i"><use href="#i-heart"/></svg></button></div>
+        </article>
+
+        <article class="res t-virtual" data-tipo="ingenieria" data-mod="virtual" data-cost="arancelada">
+          <div class="ficha"><b>4</b><span>años</span></div>
+          <div class="res-main">
+            <h3>Ingeniería en Software</h3>
+            <ul class="meta"><li><svg class="i"><use href="#i-pin"/></svg>UNQ, a distancia</li><li><svg class="i"><use href="#i-users"/></svg>350+ estudiantes</li></ul>
+            <div class="chips"><span class="chip">Ingeniería</span><span class="chip mod">Virtual</span><span class="chip">Arancelada</span></div>
+          </div>
+          <div class="res-act"><a class="btn btn-primary" href="#detalle">Ver detalle</a><button class="btn-icon fav-toggle" type="button" aria-pressed="false" data-fav="Ingeniería en Software" aria-label="Guardar Ingeniería en Software en favoritos"><svg class="i"><use href="#i-heart"/></svg></button></div>
+        </article>
+
+        <article class="res t-virtual" data-tipo="licenciatura" data-mod="virtual" data-cost="arancelada">
+          <div class="ficha"><b>4</b><span>años</span></div>
+          <div class="res-main">
+            <h3>Licenciatura en Informática</h3>
+            <ul class="meta"><li><svg class="i"><use href="#i-pin"/></svg>UNQ, a distancia</li><li><svg class="i"><use href="#i-users"/></svg>640+ estudiantes</li></ul>
+            <div class="chips"><span class="chip">Licenciatura</span><span class="chip mod">Virtual</span><span class="chip">Arancelada</span></div>
+          </div>
+          <div class="res-act"><a class="btn btn-primary" href="#detalle">Ver detalle</a><button class="btn-icon fav-toggle" type="button" aria-pressed="false" data-fav="Licenciatura en Informática" aria-label="Guardar Licenciatura en Informática en favoritos"><svg class="i"><use href="#i-heart"/></svg></button></div>
+        </article>
+
+        <article class="res t-semi" data-tipo="profesorado" data-mod="semi" data-cost="gratuita">
+          <div class="ficha free"><b>4</b><span>años</span></div>
+          <div class="res-main">
+            <h3>Profesorado en Informática</h3>
+            <ul class="meta"><li><svg class="i"><use href="#i-pin"/></svg>UNSAM, San Martín</li><li><svg class="i"><use href="#i-users"/></svg>210+ estudiantes</li></ul>
+            <div class="chips"><span class="chip">Profesorado</span><span class="chip mod">Semipresencial</span><span class="chip gratis">Gratuita</span></div>
+          </div>
+          <div class="res-act"><a class="btn btn-primary" href="#detalle">Ver detalle</a><button class="btn-icon fav-toggle" type="button" aria-pressed="false" data-fav="Profesorado en Informática" aria-label="Guardar Profesorado en Informática en favoritos"><svg class="i"><use href="#i-heart"/></svg></button></div>
+        </article>
+
+        <div class="empty" id="resEmpty" hidden>
+          <b>Ninguna carrera cumple todos los filtros.</b>
+          <p>Probá con otra modalidad o quitá algún filtro para ver más opciones.</p>
+          <button class="btn btn-ghost" type="button" id="clearFilters">Quitar filtros</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DETALLE ============ -->
+  <section class="sec" id="detalle" aria-labelledby="h-det">
+    <header class="sec-head">
+      <h2 id="h-det">Detalle de carrera</h2>
+      <p>Información completa para tomar la mejor decisión.</p>
+    </header>
+
+    <div class="detail-hero t-presencial">
+      <div>
+        <div class="chips on-tone"><span class="chip">Ingeniería</span><span class="chip mod">Presencial</span><span class="chip gratis">Gratuita</span><span class="chip">5 años</span></div>
+        <h3 class="detail-name">Ingeniería en Sistemas</h3>
+        <p>Universidad Nacional de La Matanza (UNLaM)</p>
+      </div>
+      <div class="stage-act">
+        <button class="btn btn-light" type="button"><svg class="i"><use href="#i-phone"/></svg>Contactar universidad</button>
+        <button class="btn btn-line-light fav-toggle" type="button" aria-pressed="false" data-fav="Ingeniería en Sistemas"><svg class="i"><use href="#i-heart"/></svg><span class="fav-label">Guardar</span></button>
+      </div>
+    </div>
+
+    <div class="detail-grid">
+      <div class="detail-main">
+        <section class="block">
+          <h4>Descripción</h4>
+          <p>La Ingeniería en Sistemas forma profesionales capaces de diseñar, desarrollar e implementar soluciones tecnológicas integrales. Vas a aprender programación, bases de datos, redes, seguridad informática y gestión de proyectos.</p>
+        </section>
+        <section class="block">
+          <h4>Plan de estudios</h4>
+          <p>10 cuatrimestres distribuidos en 5 años. Incluye materias teóricas y prácticas, trabajos en equipo, proyectos integradores y una pasantía profesional.</p>
+        </section>
+        <section class="block">
+          <h4>Requisitos de inscripción</h4>
+          <ul class="checks">
+            <li><svg class="i"><use href="#i-check"/></svg>Título secundario completo o constancia de título en trámite</li>
+            <li><svg class="i"><use href="#i-check"/></svg>DNI vigente</li>
+            <li><svg class="i"><use href="#i-check"/></svg>Formulario de inscripción completo</li>
+            <li><svg class="i"><use href="#i-check"/></svg>Curso de Ingreso</li>
+            <li><svg class="i"><use href="#i-check"/></svg>Inscripción dentro de las fechas de admisión</li>
+          </ul>
+        </section>
+      </div>
+
+      <dl class="facts t-presencial">
+        <div><dt>Tipo de carrera</dt><dd>Ingeniería <small>Carrera de grado</small></dd></div>
+        <div><dt>Modalidad</dt><dd><span class="sw"></span>Presencial</dd></div>
+        <div><dt>Duración</dt><dd>5 años <small>10 cuatrimestres</small></dd></div>
+        <div><dt>Costo</dt><dd><span class="chip gratis">Gratuita</span><small>Universidad pública nacional</small></dd></div>
+        <div><dt>Ubicación</dt><dd>San Justo <small>La Matanza, Buenos Aires</small></dd></div>
+        <div><dt>Estudiantes activos</dt><dd>500+</dd></div>
+      </dl>
+    </div>
+
+    <section class="wide t-presencial" aria-labelledby="h-jobs">
+      <div class="wide-head">
+        <h3 id="h-jobs">Campo laboral</h3>
+        <p>Dónde trabajan sus egresados y cuánta demanda hay hoy en cada sector.</p>
+      </div>
+      <ul class="jobs">
+        <li class="job"><span class="job-ico"><svg class="i"><use href="#i-code"/></svg></span><div><h4>Empresas de tecnología</h4><p>Desarrollo de software, infraestructura y producto.</p></div>
+          <div class="meter"><span class="meter-bars"><i class="on"></i><i class="on"></i><i class="on"></i></span><span>Demanda muy alta</span></div></li>
+        <li class="job"><span class="job-ico"><svg class="i"><use href="#i-bank"/></svg></span><div><h4>Bancos y fintech</h4><p>Sistemas transaccionales, seguridad y datos.</p></div>
+          <div class="meter"><span class="meter-bars"><i class="on"></i><i class="on"></i><i class="on"></i></span><span>Demanda muy alta</span></div></li>
+        <li class="job"><span class="job-ico"><svg class="i"><use href="#i-laptop"/></svg></span><div><h4>Remoto y freelance</h4><p>Proyectos para clientes del país y del exterior.</p></div>
+          <div class="meter"><span class="meter-bars"><i class="on"></i><i class="on"></i><i class="on"></i></span><span>Demanda muy alta</span></div></li>
+        <li class="job"><span class="job-ico"><svg class="i"><use href="#i-chart"/></svg></span><div><h4>Consultoría</h4><p>Implementación de sistemas y mejora de procesos.</p></div>
+          <div class="meter"><span class="meter-bars"><i class="on"></i><i class="on"></i><i></i></span><span>Demanda alta</span></div></li>
+        <li class="job"><span class="job-ico"><svg class="i"><use href="#i-gov"/></svg></span><div><h4>Sector público</h4><p>Modernización de organismos y gobierno digital.</p></div>
+          <div class="meter"><span class="meter-bars"><i class="on"></i><i class="on"></i><i></i></span><span>Demanda alta</span></div></li>
+        <li class="job"><span class="job-ico"><svg class="i"><use href="#i-cap"/></svg></span><div><h4>Docencia e investigación</h4><p>Universidades, institutos y laboratorios.</p></div>
+          <div class="meter"><span class="meter-bars"><i class="on"></i><i></i><i></i></span><span>Demanda media</span></div></li>
+      </ul>
+    </section>
+
+    <section class="wide t-presencial" aria-labelledby="h-perks">
+      <div class="wide-head">
+        <h3 id="h-perks">Ventajas de esta carrera</h3>
+        <p>Lo que más valoran estudiantes y egresados.</p>
+      </div>
+      <ul class="perks">
+        <li class="perk"><svg class="i"><use href="#i-trend"/></svg><h4>Demanda laboral muy alta</h4><p>Una de las carreras con más búsquedas activas de empleo en Argentina.</p></li>
+        <li class="perk"><svg class="i"><use href="#i-coin"/></svg><h4>Salarios competitivos</h4><p>Buenas perspectivas salariales y crecimiento profesional sostenido.</p></li>
+        <li class="perk"><svg class="i"><use href="#i-laptop"/></svg><h4>Trabajo remoto posible</h4><p>Muchas empresas contratan en modalidad remota o por proyecto.</p></li>
+        <li class="perk"><svg class="i"><use href="#i-door"/></svg><h4>Ingreso sin examen</h4><p>Te inscribís con el secundario completo, sin examen eliminatorio.</p></li>
+        <li class="perk"><svg class="i"><use href="#i-cap"/></svg><h4>Camino al posgrado</h4><p>Especializaciones y maestrías para seguir formándote.</p></li>
+        <li class="perk"><svg class="i"><use href="#i-team"/></svg><h4>Comunidad activa</h4><p>Grupos de estudio, hackatones y redes de estudiantes y egresados.</p></li>
+      </ul>
+    </section>
+  </section>
+</main>
+
+<footer><div class="wrap">MiCarrera. Prototipo de alta fidelidad con datos de ejemplo.</div></footer>
+
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/micarrera.js"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>MiCarrera - Ingresar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&display=swap">
+    <link rel="stylesheet" href="assets/css/micarrera.css">
+    <script>try { const t = localStorage.getItem('micarrera-tema'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M9 6v12M15 6v12"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6-5.5-6-11a6 6 0 0 1 12 0c0 5.5-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0M16 5.2a3 3 0 0 1 0 5.6M17.5 14.2a5.5 5.5 0 0 1 3 4.8"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8v8M8 12h8"/></symbol>
+  <symbol id="i-laptop" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 19h20"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16v-4M12 16V8M16 16v-6"/></symbol>
+  <symbol id="i-mind" viewBox="0 0 24 24"><circle cx="12" cy="10" r="6"/><path d="M9 20h6M12 16v4M10 9a2 2 0 1 1 3 1.7c-.6.4-1 .8-1 1.3"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 3l6 6-6 12-6-12 6-6z"/><circle cx="12" cy="11" r="1.8"/><path d="M12 13v8"/></symbol>
+  <symbol id="i-bank" viewBox="0 0 24 24"><path d="M3 10h18L12 4 3 10zM5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/></symbol>
+  <symbol id="i-gov" viewBox="0 0 24 24"><path d="M4 20V9l8-5 8 5v11M9 20v-6h6v6M3 20h18"/></symbol>
+  <symbol id="i-cap" viewBox="0 0 24 24"><path d="m2 9 10-5 10 5-10 5L2 9z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></symbol>
+  <symbol id="i-door" viewBox="0 0 24 24"><path d="M6 20V4h9l3 2v14M3 20h18M12 12h.01"/></symbol>
+  <symbol id="i-trend" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></symbol>
+  <symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M14.8 9.3c-.6-.8-1.6-1.3-2.8-1.3-1.7 0-3 .9-3 2s1.3 1.7 3 2 3 .9 3 2-1.3 2-3 2c-1.3 0-2.4-.5-3-1.4M12 6.5V8M12 16v1.5"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-team" viewBox="0 0 24 24"><circle cx="12" cy="7" r="3"/><circle cx="5" cy="10" r="2.2"/><circle cx="19" cy="10" r="2.2"/><path d="M7 20a5 5 0 0 1 10 0M1.5 18a3.5 3.5 0 0 1 5-3.2M22.5 18a3.5 3.5 0 0 0-5-3.2"/></symbol>
+</svg>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="index.html#inicio"><span class="logo-mark" aria-hidden="true"></span>MiCarrera</a>
+    <nav aria-label="Principal">
+      <a href="index.html#inicio">Inicio</a>
+      <a href="index.html#resultados">Carreras</a>
+      <a href="favoritos.html#comparar">Comparar</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="btn-icon" id="themeToggle" type="button" aria-label="Cambiar a modo oscuro"><svg class="i"><use href="#i-moon"/></svg></button>
+      <a class="btn btn-ghost" href="favoritos.html#favoritos"><svg class="i"><use href="#i-heart"/></svg>Favoritos <span class="count" data-fav-count>0</span></a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="sec auth" id="ingresar" aria-labelledby="h-auth">
+    <div class="auth-side t-presencial">
+      <svg class="i" aria-hidden="true"><use href="#i-heart"/></svg>
+      <h2>Guardá y compará tus carreras</h2>
+      <ul>
+        <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Tus favoritas siempre a mano</li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Comparación lado a lado</li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Contacto directo con la universidad</li>
+      </ul>
+      <p class="demo">Cuenta de prueba: <b>demo@micarrera.ar</b> / <b>micarrera1</b></p>
+    </div>
+
+    <div class="auth-card">
+      <h1 id="h-auth" class="auth-title">Ingresar</h1>
+      <div class="tabs" role="tablist" aria-label="Acceso">
+        <button class="tab" role="tab" id="tab-in" type="button" aria-selected="true" aria-controls="formIn">Ingresar</button>
+        <button class="tab" role="tab" id="tab-up" type="button" aria-selected="false" aria-controls="formUp" tabindex="-1">Crear cuenta</button>
+      </div>
+
+      <div class="form-alert" id="formAlert" role="alert" hidden></div>
+
+      <form class="auth-form" id="formIn" role="tabpanel" aria-labelledby="tab-in" novalidate>
+        <div class="field"><label for="inEmail">Correo electrónico</label><input id="inEmail" name="email" type="email" autocomplete="email" placeholder="nombre@correo.com"><p class="err" id="inEmailErr" hidden></p></div>
+        <div class="field"><label for="inPass">Contraseña</label><input id="inPass" name="pass" type="password" autocomplete="current-password"><p class="err" id="inPassErr" hidden></p></div>
+        <button class="btn btn-primary" type="submit">Ingresar</button>
+      </form>
+
+      <form class="auth-form" id="formUp" role="tabpanel" aria-labelledby="tab-up" novalidate hidden>
+        <div class="field"><label for="upName">Nombre</label><input id="upName" name="name" type="text" autocomplete="given-name"><p class="err" id="upNameErr" hidden></p></div>
+        <div class="field"><label for="upEmail">Correo electrónico</label><input id="upEmail" name="email" type="email" autocomplete="email" placeholder="nombre@correo.com"><p class="err" id="upEmailErr" hidden></p></div>
+        <div class="field"><label for="upPass">Contraseña</label><input id="upPass" name="pass" type="password" autocomplete="new-password" aria-describedby="upPassHint"><p class="hint" id="upPassHint">Mínimo 6 caracteres.</p><p class="err" id="upPassErr" hidden></p></div>
+        <button class="btn btn-primary" type="submit">Crear cuenta</button>
+      </form>
+
+      <p class="auth-skip"><a href="index.html">Continuar sin cuenta</a></p>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">MiCarrera. Prototipo de alta fidelidad con datos de ejemplo.</div></footer>
+
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/micarrera.js"></script>
+<script src="assets/js/login.js"></script>
+</body>
+</html>
