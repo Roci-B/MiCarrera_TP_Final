@@ -115,6 +115,8 @@
     document.querySelectorAll('#favGrid input, #cmpLegend input').forEach(i => { if (i.value === input.value) i.checked = input.checked; });
     drawCmp();
   }
+  // con menos de dos carreras tildadas el botón está deshabilitado: no navega
+  $('cmpBtn').addEventListener('click', e => { if (e.currentTarget.getAttribute('aria-disabled') === 'true') e.preventDefault(); });
   $('favGrid').addEventListener('change', pick);
   $('cmpLegend').addEventListener('change', pick);
 
