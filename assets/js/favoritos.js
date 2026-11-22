@@ -7,8 +7,8 @@
   const off = new Set();   // favoritas que el usuario destildó de la comparación
 
   const names = () => MC.user() ? MC.favs().filter(n => CARRERAS[n]) : [];
-  // paleta monocromática: azul de más intenso a más claro según la posición en favoritos
-  const shade = (i, n) => `hsl(214 72% ${n < 2 ? 52 : Math.round(46 + i * 30 / (n - 1))}%)`;
+  // paleta monocromática: violeta de marca (--brand) de más intenso a más claro según la posición en favoritos
+  const shade = (i, n) => `hsl(258 58% ${n < 2 ? 46 : Math.round(40 + i * 34 / (n - 1))}%)`;
   const costChip = c => c.free ? '<span class="chip gratis">Gratuita</span>' : '<span class="chip">Arancelada</span>';
 
   /* ---------- tarjetas y leyenda ---------- */
@@ -83,6 +83,32 @@
         `<td${cls ? ` class="${cls(r)}"` : ''}>${fn(r)}</td>`).join('')}</tr>`).join('')}</tbody>`;
   }
 
+  /* ---------- tabla en mobile: selector de carrera + tabla de una sola carrera ---------- */
+  const mob = $('cmpMobile');
+  let mSel = null, mRows = [];
+  function drawMobile(rows) {
+    mRows = rows;
+    mob.hidden = !rows.length;
+    if (!rows.length) return;
+    let cur = rows.find(r => r.name === mSel);
+    if (!cur) { cur = rows[0]; mSel = cur.name; }
+    mob.innerHTML = `<div class="field"><label for="cmpCareer">Carrera</label>
+      <select id="cmpCareer">${rows.map(r => `<option value="${r.name}"${r === cur ? ' selected' : ''}>${r.name}</option>`).join('')}</select></div>
+      <div class="cmp-m-head" style="--tone:${cur.color}"><span class="sw"></span>${cur.name}<small>${cur.uni}</small></div>
+      <table class="cmp-m-table"><tbody>${ROWS.map(([label, fn, cls]) =>
+        `<tr><th scope="row">${label}</th><td${cls ? ` class="${cls(cur)}"` : ''}>${fn(cur)}</td></tr>`).join('')}</tbody></table>`;
+  }
+  mob.addEventListener('change', e => {
+    if (e.target.id !== 'cmpCareer') return;
+    mSel = e.target.value;
+    drawMobile(mRows);
+    $('cmpCareer').focus();
+  });
+
+  // el trazo de la columna fija solo se ve mientras hay scroll horizontal
+  const tblWrap = $('cmpTableWrap');
+  tblWrap.addEventListener('scroll', () => tblWrap.classList.toggle('scrolled', tblWrap.scrollLeft > 0), { passive: true });
+
   /* ---------- armado ---------- */
   function drawCmp() {
     const list = names();
@@ -97,6 +123,7 @@
     }).join('') : '<p class="note">Seleccioná al menos una carrera para ver los gráficos.</p>';
     $('cmpTableWrap').hidden = !rows.length;
     if (rows.length) drawTable(rows);
+    drawMobile(rows);
   }
   // se llama cada vez que cambian los favoritos (auth.js avisa con el evento mc:favs)
   function render() {
