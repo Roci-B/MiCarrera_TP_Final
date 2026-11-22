@@ -7,8 +7,8 @@
   const off = new Set();   // favoritas que el usuario destildó de la comparación
 
   const names = () => MC.user() ? MC.favs().filter(n => CARRERAS[n]) : [];
-  // paleta monocromática: violeta de marca (--brand) de más intenso a más claro según la posición en favoritos
-  const shade = (i, n) => `hsl(258 58% ${n < 2 ? 46 : Math.round(40 + i * 34 / (n - 1))}%)`;
+  // paleta categórica: cada carrera tiene su propio color (definidos como --p1…--p10 en el CSS)
+  const shade = (i) => `var(--p${i % 10 + 1})`;
   const costChip = c => c.free ? '<span class="chip gratis">Gratuita</span>' : '<span class="chip">Arancelada</span>';
 
   /* ---------- tarjetas y leyenda ---------- */
@@ -25,7 +25,7 @@
   };
   const legendItem = (n, i, total) => {
     const c = CARRERAS[n];
-    return `<li style="--tone:${shade(i, total)}"><label><input type="checkbox" value="${n}"${off.has(n) ? '' : ' checked'}><span><b>${n}</b><span>${c.uni}, ${MOD[c.t].toLowerCase()}</span></span></label></li>`;
+    return `<li style="--tone:${shade(i)}"><label><input type="checkbox" value="${n}"${off.has(n) ? '' : ' checked'}><span><b>${n}</b><span>${c.uni}, ${MOD[c.t].toLowerCase()}</span></span></label></li>`;
   };
 
   /* ---------- gráficos ---------- */
@@ -61,6 +61,8 @@
   }
 
   /* ---------- tabla ---------- */
+  // meas: valores medibles. Se pintan según su posición entre las carreras comparadas
+  // (verde = mejor, rojo = más exigente, ámbar = intermedio)
   const ROWS = [
     ['Tipo de carrera', c => c.tipo],
     ['Modalidad', c => `<span class="chip mod">${MOD[c.t]}</span>`, c => `t-${c.t}`],
@@ -68,20 +70,55 @@
     ['Costo', costChip],
     ['Ubicación', c => c.ubic],
     ['Requisitos de ingreso', c => c.req],
-    ['Demanda laboral', c => DEM[c.dem]],
-    ['Salario inicial*', c => `$${c.sal[0]}–${c.sal[1]}k`],
+    ['Demanda laboral', c => DEM[c.dem], null, {key: c => c.dem}],
+    ['Salario inicial*', c => `$${c.sal[0]}–${c.sal[1]}k`, null, {key: c => c.sal[1]}],
     ['Plan de estudios', c => c.plan],
     ['Posgrado', c => c.pos],
     ['Trabajo remoto', c => c.remoto],
   ];
+  const tier = (meas, c, rows) => {
+    const ks = rows.map(meas.key), hi = Math.max(...ks), lo = Math.min(...ks), k = meas.key(c);
+    return hi === lo ? 'mid' : k === hi ? 'good' : k === lo ? 'low' : 'mid';
+  };
+  const cell = ([, fn, , meas], c, rows) => meas ? `<span class="val ${tier(meas, c, rows)}">${fn(c)}</span>` : fn(c);
+
+  let pinned = null;   // nombre de la carrera fijada en la grilla
   function drawTable(rows) {
     const table = $('cmpTable');
+    if (pinned && !rows.some(r => r.name === pinned)) pinned = null;
     table.style.minWidth = `${200 + rows.length * 190}px`;
-    table.innerHTML = `<thead><tr><th scope="col">Aspecto</th>${rows.map(r =>
-      `<th scope="col" style="--tone:${r.color}"><span class="sw"></span>${r.name}<span>${r.uni}</span></th>`).join('')}</tr></thead>
-      <tbody>${ROWS.map(([label, fn, cls]) => `<tr><th scope="row">${label}</th>${rows.map(r =>
-        `<td${cls ? ` class="${cls(r)}"` : ''}>${fn(r)}</td>`).join('')}</tr>`).join('')}</tbody>`;
+    table.classList.toggle('pinned', !!pinned);
+    table.innerHTML = `<thead><tr><th scope="col">Aspecto</th>${rows.map((r, j) =>
+      `<th scope="col" data-col="${j + 1}" style="--tone:${r.color}"${r.name === pinned ? ' class="pin"' : ''}><button type="button" aria-pressed="${r.name === pinned}" title="Fijar esta carrera" data-name="${r.name}"><span class="sw"></span>${r.name}<span>${r.uni}</span></button></th>`).join('')}</tr></thead>
+      <tbody>${ROWS.map(row => `<tr><th scope="row">${row[0]}</th>${rows.map((r, j) =>
+        `<td data-col="${j + 1}"${r.name === pinned ? ' style="--tone:' + r.color + '"' : ''} class="${[row[2] ? row[2](r) : '', r.name === pinned ? 'pin' : ''].join(' ').trim()}">${cell(row, r, rows)}</td>`).join('')}</tr>`).join('')}</tbody>`;
   }
+
+  // cruz de resaltado: al pasar por una celda se marcan su fila y su columna
+  const tbl = $('cmpTable');
+  const clearHl = () => tbl.querySelectorAll('.hl, .hl-x').forEach(e => e.classList.remove('hl', 'hl-x'));
+  const hl = target => {
+    const cellEl = target.closest('td, th[data-col]');
+    clearHl();
+    if (!cellEl || !cellEl.dataset.col) return;
+    const col = cellEl.dataset.col;
+    tbl.querySelectorAll(`[data-col="${col}"]`).forEach(e => e.classList.add('hl-x'));
+    const tr = cellEl.closest('tr');
+    if (tr.parentNode.tagName === 'TBODY') tr.classList.add('hl');
+    tr.querySelectorAll('td').forEach(e => e.classList.add('hl'));
+  };
+  tbl.addEventListener('mouseover', e => hl(e.target));
+  tbl.addEventListener('mouseleave', clearHl);
+  tbl.addEventListener('focusin', e => hl(e.target));
+  tbl.addEventListener('focusout', clearHl);
+  tbl.addEventListener('click', e => {
+    const b = e.target.closest('button[data-name]');
+    if (!b) return;
+    pinned = pinned === b.dataset.name ? null : b.dataset.name;
+    drawCmp();
+    const again = [...tbl.querySelectorAll('button[data-name]')].find(x => x.dataset.name === b.dataset.name);
+    if (again) again.focus();
+  });
 
   /* ---------- tabla en mobile: selector de carrera + tabla de una sola carrera ---------- */
   const mob = $('cmpMobile');
@@ -95,8 +132,8 @@
     mob.innerHTML = `<div class="field"><label for="cmpCareer">Carrera</label>
       <select id="cmpCareer">${rows.map(r => `<option value="${r.name}"${r === cur ? ' selected' : ''}>${r.name}</option>`).join('')}</select></div>
       <div class="cmp-m-head" style="--tone:${cur.color}"><span class="sw"></span>${cur.name}<small>${cur.uni}</small></div>
-      <table class="cmp-m-table"><tbody>${ROWS.map(([label, fn, cls]) =>
-        `<tr><th scope="row">${label}</th><td${cls ? ` class="${cls(cur)}"` : ''}>${fn(cur)}</td></tr>`).join('')}</tbody></table>`;
+      <table class="cmp-m-table"><tbody>${ROWS.map(row =>
+        `<tr><th scope="row">${row[0]}</th><td${row[2] ? ` class="${row[2](cur)}"` : ''}>${cell(row, cur, rows)}</td></tr>`).join('')}</tbody></table>`;
   }
   mob.addEventListener('change', e => {
     if (e.target.id !== 'cmpCareer') return;
@@ -112,7 +149,7 @@
   /* ---------- armado ---------- */
   function drawCmp() {
     const list = names();
-    const rows = list.filter(n => !off.has(n)).map(n => ({name: n, ...CARRERAS[n], color: shade(list.indexOf(n), list.length)}));
+    const rows = list.filter(n => !off.has(n)).map(n => ({name: n, ...CARRERAS[n], color: shade(list.indexOf(n))}));
     const btn = $('cmpBtn');
     btn.textContent = `Comparar seleccionadas (${rows.length})`;
     btn.setAttribute('aria-disabled', rows.length < 2);
@@ -121,7 +158,7 @@
       const winners = rows.filter(r => p.key(r) === best).map(r => r.short).join(' y ');
       return `<figure class="chart"><figcaption><b>${p.title}</b><span>${p.sub}</span></figcaption>${panelSVG(p, rows)}<p class="win">${p.win}: ${winners}</p></figure>`;
     }).join('') : '<p class="note">Seleccioná al menos una carrera para ver los gráficos.</p>';
-    $('cmpTableWrap').hidden = !rows.length;
+    $('cmpTableWrap').hidden = $('cmpTools').hidden = !rows.length;
     if (rows.length) drawTable(rows);
     drawMobile(rows);
   }

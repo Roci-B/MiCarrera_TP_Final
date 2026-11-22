@@ -37,6 +37,22 @@ img {
   --aside-line: #D3C8EF;
   --hl: #FFD84D;
   --hl-ink: #2B2000;
+  --p1: #6F4BD8;
+  --p2: #E8801A;
+  --p3: #13A39B;
+  --p4: #D23C77;
+  --p5: #3B7BEA;
+  --p6: #8FA80F;
+  --p7: #B05AD6;
+  --p8: #D9A400;
+  --p9: #E0554B;
+  --p10: #4A9A3A;
+  --good: #137A3F;
+  --good-bg: #DDF3E4;
+  --mid: #8A5A00;
+  --mid-bg: #FFEFC7;
+  --low: #B3261E;
+  --low-bg: #FBE1DE;
   --display: "Archivo", "Arial Narrow", system-ui, sans-serif;
   --text: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
@@ -59,6 +75,12 @@ img {
     --tag-on-tone: #7E63E6;
     --aside: #261D3F;
     --aside-line: #3A2F5C;
+    --good: #6FDC9A;
+    --good-bg: #17382A;
+    --mid: #FFD27A;
+    --mid-bg: #3D3010;
+    --low: #FF9A92;
+    --low-bg: #411C1A;
     color-scheme: dark
   }
 }
@@ -80,6 +102,12 @@ img {
   --tag-on-tone: #7E63E6;
   --aside: #261D3F;
   --aside-line: #3A2F5C;
+  --good: #6FDC9A;
+  --good-bg: #17382A;
+  --mid: #FFD27A;
+  --mid-bg: #3D3010;
+  --low: #FF9A92;
+  --low-bg: #411C1A;
   color-scheme: dark
 }
 
@@ -517,22 +545,22 @@ main.wrap {
 
 .hero-head {
   display: grid;
-  gap: 10px;
-  max-width: 60ch
+  gap: 4px;
+  max-width: 70ch
 }
 
 .hero-head h1 {
   font-family: var(--display);
-  font-stretch: 125%;
-  font-weight: 850;
-  font-size: clamp(2.2rem, 5.2vw, 3.9rem);
-  letter-spacing: -.03em;
-  line-height: .98
+  font-stretch: 112%;
+  font-weight: 750;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  letter-spacing: -.01em;
+  line-height: 1.15
 }
 
 .hero-head p {
   color: var(--muted);
-  font-size: 1.08rem
+  font-size: .95rem
 }
 
 .hero-grid {
@@ -600,7 +628,7 @@ main.wrap {
   font-family: var(--display);
   font-stretch: 118%;
   font-weight: 850;
-  font-size: clamp(2rem, 4.4vw, 3.3rem);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
   letter-spacing: -.025em;
   line-height: 1
 }
@@ -1328,6 +1356,182 @@ main.wrap {
   color: var(--muted)
 }
 
+/* gráfico de barras horizontales: un color por ventaja */
+.vchart {
+  margin: 0;
+  display: grid;
+  gap: 14px;
+  padding: 22px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px
+}
+
+.vchart figcaption {
+  display: grid;
+  gap: 2px
+}
+
+.vchart figcaption b {
+  font-size: 1.05rem
+}
+
+.vchart figcaption span {
+  font-size: .84rem;
+  color: var(--muted)
+}
+
+.hbars {
+  display: grid;
+  gap: 10px
+}
+
+.hbars li {
+  display: grid;
+  grid-template-columns: minmax(120px, 190px) minmax(0, 1fr) 3.2em;
+  align-items: center;
+  gap: 12px
+}
+
+.hb-l {
+  font-size: .9rem;
+  font-weight: 600
+}
+
+.hb-t {
+  height: 16px;
+  border-radius: 8px;
+  background: var(--sunk);
+  overflow: hidden
+}
+
+.hb-t i {
+  display: block;
+  height: 100%;
+  width: var(--v);
+  border-radius: 8px;
+  background: var(--c);
+  transform-origin: left;
+  animation: grow .7s ease-out both
+}
+
+.hbars b,
+.ub {
+  font-variant-numeric: tabular-nums
+}
+
+.hbars b {
+  text-align: right
+}
+
+@keyframes grow {
+  from { transform: scaleX(0) }
+}
+
+/* comparativa con otras universidades */
+.uni-table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+  font-size: .94rem
+}
+
+.uni-table th,
+.uni-table td {
+  padding: 13px 18px;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle
+}
+
+.uni-table thead th {
+  background: var(--sunk);
+  font-weight: 700
+}
+
+.uni-table tbody tr:last-child th,
+.uni-table tbody tr:last-child td {
+  border-bottom: 0
+}
+
+.uni-table tbody th {
+  font-weight: 700
+}
+
+.uni-table tbody th small {
+  display: block;
+  font-weight: 500;
+  font-size: .8rem;
+  color: var(--muted)
+}
+
+.uni-table .sw {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 8px;
+  border-radius: 3px;
+  background: var(--c)
+}
+
+.uni-table tbody tr {
+  cursor: pointer;
+  transition: background .15s
+}
+
+.uni-table tbody tr:hover,
+.uni-table tbody tr:focus-visible,
+.uni-table tbody tr.is-picked {
+  background: var(--sunk)
+}
+
+.uni-table tbody tr.is-picked {
+  box-shadow: inset 4px 0 0 var(--c)
+}
+
+.uni-table tbody tr.is-current th small {
+  color: var(--brand);
+  font-weight: 700
+}
+
+.ub {
+  display: grid;
+  grid-template-columns: 90px auto;
+  align-items: center;
+  gap: 10px
+}
+
+.ub-t {
+  height: 10px;
+  border-radius: 5px;
+  background: var(--sunk);
+  overflow: hidden
+}
+
+.uni-table tr:hover .ub-t,
+.uni-table tr.is-picked .ub-t {
+  background: var(--surface)
+}
+
+.ub-t i {
+  display: block;
+  height: 100%;
+  width: var(--v);
+  background: var(--c);
+  border-radius: 5px
+}
+
+@media (max-width:720px) {
+  .hbars li {
+    grid-template-columns: minmax(0, 1fr) 3.2em
+  }
+
+  .hbars .hb-t {
+    grid-column: 1 / -1;
+    grid-row: 2
+  }
+}
+
 /* ---------- favoritos ---------- */
 .fav-grid {
   display: grid;
@@ -1627,6 +1831,105 @@ main.wrap {
 
 .cmp-table tbody th {
   background: var(--surface)
+}
+
+/* grilla interactiva: cruz de resaltado, columna fijada y solo diferencias */
+.cmp-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px
+}
+
+.cmp-tools small {
+  color: var(--muted)
+}
+
+.cmp-table thead th button {
+  all: unset;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 6px
+}
+
+.cmp-table thead th button:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px
+}
+
+.cmp-table thead th {
+  border-top: 4px solid var(--tone, transparent)
+}
+
+.cmp-table thead th:first-child {
+  border-top-color: transparent
+}
+
+.cmp-table td.hl,
+.cmp-table tr.hl > th {
+  background: var(--sunk)
+}
+
+.cmp-table td.hl-x {
+  background: color-mix(in srgb, var(--brand) 14%, var(--surface))
+}
+
+.cmp-table thead th.hl-x {
+  box-shadow: inset 0 -3px 0 var(--tone)
+}
+
+.cmp-table.pinned td:not(.pin),
+.cmp-table.pinned thead th:not(.pin):not(:first-child) {
+  opacity: .45
+}
+
+.cmp-table td.pin {
+  background: color-mix(in srgb, var(--tone, var(--brand)) 12%, var(--surface))
+}
+
+.cmp-table tbody tr {
+  cursor: default
+}
+
+/* valores medibles: verde = mejor, ámbar = intermedio, rojo = más exigente */
+.val {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: .9rem;
+  font-variant-numeric: tabular-nums
+}
+
+.val.good {
+  color: var(--good);
+  background: var(--good-bg)
+}
+
+.val.mid {
+  color: var(--mid);
+  background: var(--mid-bg)
+}
+
+.val.low {
+  color: var(--low);
+  background: var(--low-bg)
+}
+
+.val.good::before {
+  content: "▲"
+}
+
+.val.low::before {
+  content: "▼"
+}
+
+.val.mid::before {
+  content: "●"
 }
 
 /* mobile: en vez de la tabla ancha, selector de aspecto + lista de carreras + ficha */
