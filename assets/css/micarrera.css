@@ -1501,6 +1501,15 @@ main.wrap {
   gap: 10px
 }
 
+.ub.free {
+  display: flex;
+  justify-content: flex-start
+}
+
+.uni-table .chip.gratis {
+  padding: 2px 6px
+}
+
 .ub-t {
   height: 10px;
   border-radius: 5px;
@@ -1938,8 +1947,69 @@ main.wrap {
 }
 
 @media (max-width:720px) {
-  .table-scroll {
+  #cmpTableWrap {
     display: none
+  }
+
+  .unis .table-scroll {
+    background: none;
+    border: 0;
+    overflow: visible
+  }
+
+  .uni-table {
+    min-width: 0;
+    display: block
+  }
+
+  .uni-table thead {
+    display: none
+  }
+
+  .uni-table tbody {
+    display: grid;
+    gap: 14px
+  }
+
+  .uni-table tbody tr {
+    display: block;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden
+  }
+
+  .uni-table tbody tr.is-picked {
+    box-shadow: inset 4px 0 0 var(--c)
+  }
+
+  .uni-table tbody th {
+    display: block;
+    padding: 12px 14px;
+    background: var(--sunk)
+  }
+
+  .uni-table tbody td {
+    display: grid;
+    grid-template-columns: 42% 1fr;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--line)
+  }
+
+  .uni-table tbody tr:last-child td {
+    border-bottom: 1px solid var(--line)
+  }
+
+  .uni-table tbody td:last-child {
+    border-bottom: 0
+  }
+
+  .uni-table tbody td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--muted)
   }
 
   .cmp-m:not([hidden]) {

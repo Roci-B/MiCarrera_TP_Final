@@ -105,15 +105,6 @@
             <select id="s-dur"><option>Todas</option><option>Hasta 3 años</option><option>4 a 5 años</option><option>6 años o más</option></select></div>
         </div>
       </form>
-      <div class="legend">
-        <p class="legend-title">Cómo leer las etiquetas</p>
-        <ul>
-          <li class="t-presencial"><span class="sw"></span>Presencial</li>
-          <li class="t-semi"><span class="sw"></span>Semipresencial</li>
-          <li class="t-virtual"><span class="sw"></span>Virtual (a distancia)</li>
-          <li><span class="chip gratis">Gratuita</span>marcada en amarillo</li>
-        </ul>
-      </div>
     </div>
   </section>
 
@@ -309,12 +300,12 @@
           <span>Porcentaje que la destaca en cada aspecto (encuesta de ejemplo)</span>
         </figcaption>
         <ul class="hbars">
-          <li style="--c:var(--p1);--v:92%"><span class="hb-l">Demanda laboral</span><span class="hb-t"><i></i></span><b>92%</b></li>
-          <li style="--c:var(--p2);--v:84%"><span class="hb-l">Salarios</span><span class="hb-t"><i></i></span><b>84%</b></li>
-          <li style="--c:var(--p3);--v:81%"><span class="hb-l">Trabajo remoto</span><span class="hb-t"><i></i></span><b>81%</b></li>
-          <li style="--c:var(--p4);--v:76%"><span class="hb-l">Ingreso sin examen</span><span class="hb-t"><i></i></span><b>76%</b></li>
-          <li style="--c:var(--p5);--v:68%"><span class="hb-l">Camino al posgrado</span><span class="hb-t"><i></i></span><b>68%</b></li>
-          <li style="--c:var(--p6);--v:63%"><span class="hb-l">Comunidad activa</span><span class="hb-t"><i></i></span><b>63%</b></li>
+          <li style="--c:hsl(256 56% 36%);--v:92%"><span class="hb-l">Demanda laboral</span><span class="hb-t"><i></i></span><b>92%</b></li>
+          <li style="--c:hsl(256 56% 45%);--v:84%"><span class="hb-l">Salarios</span><span class="hb-t"><i></i></span><b>84%</b></li>
+          <li style="--c:hsl(256 60% 54%);--v:81%"><span class="hb-l">Trabajo remoto</span><span class="hb-t"><i></i></span><b>81%</b></li>
+          <li style="--c:hsl(256 66% 63%);--v:76%"><span class="hb-l">Ingreso sin examen</span><span class="hb-t"><i></i></span><b>76%</b></li>
+          <li style="--c:hsl(256 72% 72%);--v:68%"><span class="hb-l">Camino al posgrado</span><span class="hb-t"><i></i></span><b>68%</b></li>
+          <li style="--c:hsl(256 78% 80%);--v:63%"><span class="hb-l">Comunidad activa</span><span class="hb-t"><i></i></span><b>63%</b></li>
         </ul>
       </figure>
     </section>
@@ -329,21 +320,21 @@
           <table class="uni-table">
             <thead><tr><th scope="col">Universidad</th><th scope="col">Modalidad</th><th scope="col">Duración</th><th scope="col">Cuota mensual*</th><th scope="col">Ingreso</th></tr></thead>
             <tbody>
-              <tr class="is-current" tabindex="0" style="--c:var(--p1)"><th scope="row"><span class="sw"></span>UNLaM <small>Esta carrera</small></th><td>Presencial</td>
-                <td><span class="ub"><span class="ub-t"><i style="--v:83%"></i></span>5 años</span></td>
-                <td><span class="ub"><span class="ub-t"><i style="--v:0%"></i></span><span class="chip gratis">Gratuita</span></span></td><td>Curso de ingreso</td></tr>
-              <tr tabindex="0" style="--c:var(--p2)"><th scope="row"><span class="sw"></span>UTN <small>Ing. en Sistemas de Información</small></th><td>Presencial</td>
-                <td><span class="ub"><span class="ub-t"><i style="--v:83%"></i></span>5 años</span></td>
-                <td><span class="ub"><span class="ub-t"><i style="--v:0%"></i></span><span class="chip gratis">Gratuita</span></span></td><td>Seminario de ingreso</td></tr>
-              <tr tabindex="0" style="--c:var(--p3)"><th scope="row"><span class="sw"></span>UBA <small>Ing. en Informática</small></th><td>Presencial</td>
-                <td><span class="ub"><span class="ub-t"><i style="--v:100%"></i></span>6 años</span></td>
-                <td><span class="ub"><span class="ub-t"><i style="--v:0%"></i></span><span class="chip gratis">Gratuita</span></span></td><td>CBC</td></tr>
-              <tr tabindex="0" style="--c:var(--p4)"><th scope="row"><span class="sw"></span>UNQ <small>Ing. en Software</small></th><td>Virtual</td>
-                <td><span class="ub"><span class="ub-t"><i style="--v:67%"></i></span>4 años</span></td>
-                <td><span class="ub"><span class="ub-t"><i style="--v:21%"></i></span>$85.000</span></td><td>Secundario completo</td></tr>
-              <tr tabindex="0" style="--c:var(--p5)"><th scope="row"><span class="sw"></span>UADE <small>Ing. en Sistemas</small></th><td>Presencial</td>
-                <td><span class="ub"><span class="ub-t"><i style="--v:83%"></i></span>5 años</span></td>
-                <td><span class="ub"><span class="ub-t"><i style="--v:100%"></i></span>$400.000</span></td><td>Admisión con entrevista</td></tr>
+              <tr class="is-current" tabindex="0" style="--c:var(--p1)"><th scope="row"><span class="sw"></span>UNLaM <small>Esta carrera</small></th><td data-label="Modalidad">Presencial</td>
+                <td data-label="Duración"><span class="ub"><span class="ub-t"><i style="--v:83%"></i></span>5 años</span></td>
+                <td data-label="Cuota mensual*"><span class="ub free"><span class="chip gratis">Gratuita</span></span></td><td data-label="Ingreso">Curso de ingreso</td></tr>
+              <tr tabindex="0" style="--c:var(--p2)"><th scope="row"><span class="sw"></span>UTN <small>Ing. en Sistemas de Información</small></th><td data-label="Modalidad">Presencial</td>
+                <td data-label="Duración"><span class="ub"><span class="ub-t"><i style="--v:83%"></i></span>5 años</span></td>
+                <td data-label="Cuota mensual*"><span class="ub free"><span class="chip gratis">Gratuita</span></span></td><td data-label="Ingreso">Seminario de ingreso</td></tr>
+              <tr tabindex="0" style="--c:var(--p3)"><th scope="row"><span class="sw"></span>UBA <small>Ing. en Informática</small></th><td data-label="Modalidad">Presencial</td>
+                <td data-label="Duración"><span class="ub"><span class="ub-t"><i style="--v:100%"></i></span>6 años</span></td>
+                <td data-label="Cuota mensual*"><span class="ub free"><span class="chip gratis">Gratuita</span></span></td><td data-label="Ingreso">CBC</td></tr>
+              <tr tabindex="0" style="--c:var(--p4)"><th scope="row"><span class="sw"></span>UNQ <small>Ing. en Software</small></th><td data-label="Modalidad">Virtual</td>
+                <td data-label="Duración"><span class="ub"><span class="ub-t"><i style="--v:67%"></i></span>4 años</span></td>
+                <td data-label="Cuota mensual*"><span class="ub"><span class="ub-t"><i style="--v:21%"></i></span>$85.000</span></td><td data-label="Ingreso">Secundario completo</td></tr>
+              <tr tabindex="0" style="--c:var(--p5)"><th scope="row"><span class="sw"></span>UADE <small>Ing. en Sistemas</small></th><td data-label="Modalidad">Presencial</td>
+                <td data-label="Duración"><span class="ub"><span class="ub-t"><i style="--v:83%"></i></span>5 años</span></td>
+                <td data-label="Cuota mensual*"><span class="ub"><span class="ub-t"><i style="--v:100%"></i></span>$400.000</span></td><td data-label="Ingreso">Admisión con entrevista</td></tr>
             </tbody>
           </table>
         </div>
