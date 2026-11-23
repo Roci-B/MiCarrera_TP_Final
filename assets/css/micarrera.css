@@ -47,6 +47,8 @@ img {
   --p8: hsl(256 82% 75%);
   --p9: hsl(256 86% 79%);
   --p10: hsl(256 90% 83%);
+  --cmp-l-from: 24%;
+  --cmp-l-to: 66%;
   --good: #137A3F;
   --good-bg: #DDF3E4;
   --mid: #8A5A00;
@@ -86,6 +88,8 @@ img {
     --tag-on-tone: #7E63E6;
     --aside: #261D3F;
     --aside-line: #3A2F5C;
+    --cmp-l-from: 46%;
+    --cmp-l-to: 84%;
     --good: #6FDC9A;
     --good-bg: #17382A;
     --mid: #FFD27A;
@@ -124,6 +128,8 @@ img {
   --tag-on-tone: #7E63E6;
   --aside: #261D3F;
   --aside-line: #3A2F5C;
+  --cmp-l-from: 46%;
+  --cmp-l-to: 84%;
   --good: #6FDC9A;
   --good-bg: #17382A;
   --mid: #FFD27A;

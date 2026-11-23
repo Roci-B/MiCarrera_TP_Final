@@ -7,8 +7,12 @@
   const off = new Set();   // favoritas que el usuario destildó de la comparación
 
   const names = () => MC.user() ? MC.favs().filter(n => CARRERAS[n]) : [];
-  // paleta monocromática: tonalidades del violeta de la marca (--p1…--p10 en el CSS)
-  const shade = (i) => `var(--p${i % 10 + 1})`;
+  // paleta monocromática: los tonos se reparten de oscuro a claro según cuántas carreras haya,
+  // así siempre quedan lo más separados posible (extremos --cmp-l-from/--cmp-l-to en el CSS)
+  const shade = (i, n) => {
+    const t = n < 2 ? 0 : i / (n - 1);
+    return `hsl(calc(250 + ${30 * t}) 62% calc(var(--cmp-l-from) + (var(--cmp-l-to) - var(--cmp-l-from)) * ${t}))`;
+  };
   const costChip = c => c.free ? '<span class="chip gratis">Gratuita</span>' : '<span class="chip">Arancelada</span>';
 
   /* ---------- tarjetas y leyenda ---------- */
@@ -25,7 +29,7 @@
   };
   const legendItem = (n, i, total) => {
     const c = CARRERAS[n];
-    return `<li style="--tone:${shade(i)}"><label><input type="checkbox" value="${n}"${off.has(n) ? '' : ' checked'}><span><b>${n}</b><span>${c.uni}, ${MOD[c.t].toLowerCase()}</span></span></label></li>`;
+    return `<li style="--tone:${shade(i, total)}"><label><input type="checkbox" value="${n}"${off.has(n) ? '' : ' checked'}><span><b>${n}</b><span>${c.uni}, ${MOD[c.t].toLowerCase()}</span></span></label></li>`;
   };
 
   /* ---------- gráficos ---------- */
@@ -149,7 +153,7 @@
   /* ---------- armado ---------- */
   function drawCmp() {
     const list = names();
-    const rows = list.filter(n => !off.has(n)).map(n => ({name: n, ...CARRERAS[n], color: shade(list.indexOf(n))}));
+    const rows = list.filter(n => !off.has(n)).map(n => ({name: n, ...CARRERAS[n], color: shade(list.indexOf(n), list.length)}));
     const btn = $('cmpBtn');
     btn.textContent = `Comparar seleccionadas (${rows.length})`;
     btn.setAttribute('aria-disabled', rows.length < 2);
