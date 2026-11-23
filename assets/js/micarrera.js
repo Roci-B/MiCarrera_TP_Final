@@ -2,6 +2,29 @@ const MOD = { presencial: 'Presencial', semi: 'Semipresencial', virtual: 'Virtua
 const fmt = n => n.toLocaleString('es-AR');
 const $ = id => document.getElementById(id);
 
+/* ---------- menú hamburguesa (mobile) ---------- */
+(() => {
+  const nav = document.querySelector('.nav'), inner = nav?.querySelector('.nav-in');
+  if (!inner) return;
+  const btn = document.createElement('button');
+  btn.className = 'btn-icon nav-burger';
+  btn.type = 'button';
+  btn.setAttribute('aria-expanded', 'false');
+  btn.setAttribute('aria-label', 'Abrir menú');
+  btn.innerHTML = '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path class="b-open" d="M4 7h16M4 12h16M4 17h16"/><path class="b-close" d="M6 6l12 12M18 6L6 18"/></svg>';
+  inner.appendChild(btn);
+  const set = open => {
+    nav.classList.toggle('open', open);
+    document.documentElement.classList.toggle('menu-open', open);
+    btn.setAttribute('aria-expanded', open);
+    btn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+  };
+  btn.onclick = () => set(!nav.classList.contains('open'));
+  inner.querySelector('nav')?.addEventListener('click', e => { if (e.target.closest('a')) set(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && nav.classList.contains('open')) { set(false); btn.focus(); } });
+  matchMedia('(min-width:721px)').addEventListener('change', e => { if (e.matches) set(false); });
+})();
+
 /* ---------- modo claro / oscuro ---------- */
 const root = document.documentElement, themeBtn = $('themeToggle'), darkMQ = matchMedia('(prefers-color-scheme: dark)');
 try { const t = localStorage.getItem('micarrera-tema'); if (t) root.dataset.theme = t; } catch (e) { }
@@ -49,7 +72,7 @@ const slides = [
 const stage = $('stage');
 if (stage) {
   const maxC = Math.max(...slides.map(s => s.c));
-  const body = $('stageBody'), list = $('rankList'), grid = $('heroGrid');
+  const body = $('stageBody'), list = $('rankList');
   let cur = 0;
 
   list.innerHTML = slides.map((s, k) => `
@@ -58,7 +81,6 @@ if (stage) {
     <span><span class="rank-name">${s.name}</span><span class="rank-uni">${s.short}, ${MOD[s.t].toLowerCase()}${s.free ? ', gratuita' : ''}</span></span>
     <span class="rank-num">${fmt(s.c)}</span>
     <span class="rank-bar"><i style="width:${s.c / maxC * 100}%"></i></span>
-    <span class="rank-prog"></span>
   </button></li>`).join('');
   const items = [...list.querySelectorAll('.rank-item')];
 
@@ -80,24 +102,33 @@ if (stage) {
     $('pos').textContent = `${cur + 1} de ${slides.length}`;
     items.forEach((b, j) => {
       b.setAttribute('aria-current', j === cur ? 'true' : 'false');
-      const p = b.querySelector('.rank-prog');
-      p.classList.remove('run');
-      if (j === cur) { void p.offsetWidth; p.classList.add('run'); }
     });
     window.MC?.syncFavs();
+    schedule();
     if (byUser && matchMedia('(max-width:900px)').matches) items[cur].scrollIntoView({ block: 'nearest', inline: 'nearest' });
   }
-  // la barra de progreso del ítem activo marca el tiempo: al terminar, avanza (no corre con reduced-motion)
-  list.addEventListener('animationend', e => { if (e.target.classList.contains('rank-prog')) show(cur + 1); });
+  // rotación automática: el ítem activo se remarca (aria-current) y avanza cada 7s, sin indicador de carga
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let paused = false, hovering = false, timer;
+  function schedule() {
+    clearTimeout(timer);
+    if (!paused && !hovering && !reduced) timer = setTimeout(() => show(cur + 1), 7000);
+  }
   list.addEventListener('click', e => { const b = e.target.closest('.rank-item'); if (b) show(+b.dataset.i, true); });
   $('prev').onclick = () => show(cur - 1, true);
   $('next').onclick = () => show(cur + 1, true);
   $('pause').onclick = e => {
-    const paused = grid.classList.toggle('paused');
+    paused = !paused;
     e.currentTarget.setAttribute('aria-label', paused ? 'Reanudar rotación' : 'Pausar rotación');
     e.currentTarget.querySelector('use').setAttribute('href', paused ? '#i-play' : '#i-pause');
+    schedule();
   };
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) $('pause').hidden = true;
+  const hero = $('heroGrid');
+  hero.addEventListener('mouseenter', () => { hovering = true; schedule(); });
+  hero.addEventListener('mouseleave', () => { hovering = false; schedule(); });
+  hero.addEventListener('focusin', () => { hovering = true; schedule(); });
+  hero.addEventListener('focusout', () => { hovering = false; schedule(); });
+  if (reduced) $('pause').hidden = true;
   show(0);
 }
 

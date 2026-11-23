@@ -105,15 +105,6 @@
             <select id="s-dur"><option>Todas</option><option>Hasta 3 años</option><option>4 a 5 años</option><option>6 años o más</option></select></div>
         </div>
       </form>
-      <div class="legend">
-        <p class="legend-title">Cómo leer las etiquetas</p>
-        <ul>
-          <li class="t-presencial"><span class="sw"></span>Presencial</li>
-          <li class="t-semi"><span class="sw"></span>Semipresencial</li>
-          <li class="t-virtual"><span class="sw"></span>Virtual (a distancia)</li>
-          <li><span class="chip gratis">Gratuita</span>marcada en amarillo</li>
-        </ul>
-      </div>
     </div>
   </section>
 
@@ -240,11 +231,11 @@
       <div class="detail-main">
         <section class="block">
           <h4>Descripción</h4>
-          <p>La Ingeniería en Sistemas forma profesionales capaces de diseñar, desarrollar e implementar soluciones tecnológicas integrales. Vas a aprender programación, bases de datos, redes, seguridad informática y gestión de proyectos.</p>
+          <p>La Ingeniería en Sistemas forma profesionales capaces de diseñar, desarrollar e implementar soluciones tecnológicas integrales. Vas a aprender <b>programación, bases de datos, redes, seguridad informática y gestión de proyectos.</b></p> 
         </section>
         <section class="block">
           <h4>Plan de estudios</h4>
-          <p>10 cuatrimestres distribuidos en 5 años. Incluye materias teóricas y prácticas, trabajos en equipo, proyectos integradores y una pasantía profesional.</p>
+          <p><b>10 cuatrimestres distribuidos en 5 años.</b> Incluye materias teóricas y prácticas, trabajos en equipo, proyectos integradores y una pasantía profesional.</p>
         </section>
         <section class="block">
           <h4>Requisitos de inscripción</h4>
@@ -298,10 +289,57 @@
         <li class="perk"><svg class="i"><use href="#i-trend"/></svg><h4>Demanda laboral muy alta</h4><p>Una de las carreras con más búsquedas activas de empleo en Argentina.</p></li>
         <li class="perk"><svg class="i"><use href="#i-coin"/></svg><h4>Salarios competitivos</h4><p>Buenas perspectivas salariales y crecimiento profesional sostenido.</p></li>
         <li class="perk"><svg class="i"><use href="#i-laptop"/></svg><h4>Trabajo remoto posible</h4><p>Muchas empresas contratan en modalidad remota o por proyecto.</p></li>
-        <li class="perk"><svg class="i"><use href="#i-door"/></svg><h4>Ingreso sin examen</h4><p>Te inscribís con el secundario completo, sin examen eliminatorio.</p></li>
+        <li class="perk"><svg class="i"><use href="#i-door"/></svg><h4>Ingreso sin examen</h4><p>Te inscribís con el secundario completo, sin examen eliminatorio (en UNLaM hay un curso de ingreso, sin carácter eliminatorio).</p></li>
         <li class="perk"><svg class="i"><use href="#i-cap"/></svg><h4>Camino al posgrado</h4><p>Especializaciones y maestrías para seguir formándote.</p></li>
         <li class="perk"><svg class="i"><use href="#i-team"/></svg><h4>Comunidad activa</h4><p>Grupos de estudio, hackatones y redes de estudiantes y egresados.</p></li>
       </ul>
+
+      <figure class="vchart" aria-labelledby="h-vchart">
+        <figcaption>
+          <b id="h-vchart">Cómo la valoran estudiantes y egresados</b>
+          <span>Porcentaje que la destaca en cada aspecto (encuesta de ejemplo)</span>
+        </figcaption>
+        <ul class="hbars">
+          <li style="--c:hsl(256 56% 36%);--v:92%"><span class="hb-l">Demanda laboral</span><span class="hb-t"><i></i></span><b>92%</b></li>
+          <li style="--c:hsl(256 56% 45%);--v:84%"><span class="hb-l">Salarios</span><span class="hb-t"><i></i></span><b>84%</b></li>
+          <li style="--c:hsl(256 60% 54%);--v:81%"><span class="hb-l">Trabajo remoto</span><span class="hb-t"><i></i></span><b>81%</b></li>
+          <li style="--c:hsl(256 66% 63%);--v:76%"><span class="hb-l">Ingreso sin examen</span><span class="hb-t"><i></i></span><b>76%</b></li>
+          <li style="--c:hsl(256 72% 72%);--v:68%"><span class="hb-l">Camino al posgrado</span><span class="hb-t"><i></i></span><b>68%</b></li>
+          <li style="--c:hsl(256 78% 80%);--v:63%"><span class="hb-l">Comunidad activa</span><span class="hb-t"><i></i></span><b>63%</b></li>
+        </ul>
+      </figure>
+    </section>
+
+    <section class="wide t-presencial" aria-labelledby="h-unis">
+      <div class="wide-head">
+        <h3 id="h-unis">Ingeniería en Sistemas en otras universidades</h3>
+        <p>Cómo se compara esta opción con carreras equivalentes de la zona. Pasá el cursor o tocá una fila para resaltarla.</p>
+      </div>
+      <div class="unis" id="unis">
+        <div class="table-scroll">
+          <table class="uni-table">
+            <thead><tr><th scope="col">Universidad</th><th scope="col">Modalidad</th><th scope="col">Duración</th><th scope="col">Cuota mensual*</th><th scope="col">Ingreso</th></tr></thead>
+            <tbody>
+              <tr class="is-current" tabindex="0" style="--c:var(--p1)"><th scope="row"><span class="sw"></span>UNLaM <small>Esta carrera</small></th><td data-label="Modalidad">Presencial</td>
+                <td data-label="Duración"><span class="ub"><span class="ub-t"><i style="--v:83%"></i></span>5 años</span></td>
+                <td data-label="Cuota mensual*"><span class="ub free"><span class="chip gratis">Gratuita</span></span></td><td data-label="Ingreso">Curso de ingreso</td></tr>
+              <tr tabindex="0" style="--c:var(--p2)"><th scope="row"><span class="sw"></span>UTN <small>Ing. en Sistemas de Información</small></th><td data-label="Modalidad">Presencial</td>
+                <td data-label="Duración"><span class="ub"><span class="ub-t"><i style="--v:83%"></i></span>5 años</span></td>
+                <td data-label="Cuota mensual*"><span class="ub free"><span class="chip gratis">Gratuita</span></span></td><td data-label="Ingreso">Seminario de ingreso</td></tr>
+              <tr tabindex="0" style="--c:var(--p3)"><th scope="row"><span class="sw"></span>UBA <small>Ing. en Informática</small></th><td data-label="Modalidad">Presencial</td>
+                <td data-label="Duración"><span class="ub"><span class="ub-t"><i style="--v:100%"></i></span>6 años</span></td>
+                <td data-label="Cuota mensual*"><span class="ub free"><span class="chip gratis">Gratuita</span></span></td><td data-label="Ingreso">CBC</td></tr>
+              <tr tabindex="0" style="--c:var(--p4)"><th scope="row"><span class="sw"></span>UNQ <small>Ing. en Software</small></th><td data-label="Modalidad">Virtual</td>
+                <td data-label="Duración"><span class="ub"><span class="ub-t"><i style="--v:67%"></i></span>4 años</span></td>
+                <td data-label="Cuota mensual*"><span class="ub"><span class="ub-t"><i style="--v:21%"></i></span>$85.000</span></td><td data-label="Ingreso">Secundario completo</td></tr>
+              <tr tabindex="0" style="--c:var(--p5)"><th scope="row"><span class="sw"></span>UADE <small>Ing. en Sistemas</small></th><td data-label="Modalidad">Presencial</td>
+                <td data-label="Duración"><span class="ub"><span class="ub-t"><i style="--v:83%"></i></span>5 años</span></td>
+                <td data-label="Cuota mensual*"><span class="ub"><span class="ub-t"><i style="--v:100%"></i></span>$400.000</span></td><td data-label="Ingreso">Admisión con entrevista</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="note">*Valores de ejemplo para el prototipo. Las barras de duración se miden sobre 6 años y las de cuota sobre $400.000.</p>
     </section>
   </section>
 </main>
@@ -310,5 +348,17 @@
 
 <script src="assets/js/auth.js"></script>
 <script src="assets/js/micarrera.js"></script>
+<script>
+  // en la tabla de universidades, la fila tocada o enfocada queda resaltada
+  document.querySelectorAll('#unis tbody tr').forEach(tr => {
+    const mark = () => {
+      const on = !tr.classList.contains('is-picked');
+      tr.parentNode.querySelectorAll('.is-picked').forEach(r => r.classList.remove('is-picked'));
+      tr.classList.toggle('is-picked', on);
+    };
+    tr.addEventListener('click', mark);
+    tr.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); mark(); } });
+  });
+</script>
 </body>
 </html>
