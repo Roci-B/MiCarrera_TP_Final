@@ -7,7 +7,7 @@
   const off = new Set();   // favoritas que el usuario destildó de la comparación
 
   const names = () => MC.user() ? MC.favs().filter(n => CARRERAS[n]) : [];
-  // paleta categórica: cada carrera tiene su propio color (definidos como --p1…--p10 en el CSS)
+  // paleta monocromática: tonalidades del violeta de la marca (--p1…--p10 en el CSS)
   const shade = (i) => `var(--p${i % 10 + 1})`;
   const costChip = c => c.free ? '<span class="chip gratis">Gratuita</span>' : '<span class="chip">Arancelada</span>';
 
@@ -62,7 +62,7 @@
 
   /* ---------- tabla ---------- */
   // meas: valores medibles. Se pintan según su posición entre las carreras comparadas
-  // (verde = mejor, rojo = más exigente, ámbar = intermedio)
+  // (verde = mejor, rojo = más exigente, ámbar = intermedio; la demanda nunca va en rojo)
   const ROWS = [
     ['Tipo de carrera', c => c.tipo],
     ['Modalidad', c => `<span class="chip mod">${MOD[c.t]}</span>`, c => `t-${c.t}`],
@@ -70,7 +70,7 @@
     ['Costo', costChip],
     ['Ubicación', c => c.ubic],
     ['Requisitos de ingreso', c => c.req],
-    ['Demanda laboral', c => DEM[c.dem], null, {key: c => c.dem}],
+    ['Demanda laboral', c => DEM[c.dem], null, {key: c => c.dem, soft: true}],
     ['Salario inicial*', c => `$${c.sal[0]}–${c.sal[1]}k`, null, {key: c => c.sal[1]}],
     ['Plan de estudios', c => c.plan],
     ['Posgrado', c => c.pos],
@@ -78,7 +78,7 @@
   ];
   const tier = (meas, c, rows) => {
     const ks = rows.map(meas.key), hi = Math.max(...ks), lo = Math.min(...ks), k = meas.key(c);
-    return hi === lo ? 'mid' : k === hi ? 'good' : k === lo ? 'low' : 'mid';
+    return hi === lo ? 'mid' : k === hi ? 'good' : k === lo && !meas.soft ? 'low' : 'mid';
   };
   const cell = ([, fn, , meas], c, rows) => meas ? `<span class="val ${tier(meas, c, rows)}">${fn(c)}</span>` : fn(c);
 
