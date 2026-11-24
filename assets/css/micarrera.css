@@ -48,6 +48,12 @@ img {
   --p9: hsl(256 86% 79%);
   --p10: hsl(256 90% 83%);
   --bar-rest: #B9A6EC;
+  --good: #137A3F;
+  --good-bg: #DDF3E4;
+  --mid: #8A5A00;
+  --mid-bg: #FFEFC7;
+  --low: #B3261E;
+  --low-bg: #FBE1DE;
   --pie-lo: #C9B9F2;
   --pie-hi: #241763;
   --display: "Archivo", "Arial Narrow", system-ui, sans-serif;
@@ -84,6 +90,12 @@ img {
     --aside: #261D3F;
     --aside-line: #3A2F5C;
     --bar-rest: #4B3F78;
+    --good: #6FDC9A;
+    --good-bg: #17382A;
+    --mid: #FFD27A;
+    --mid-bg: #3D3010;
+    --low: #FF9A92;
+    --low-bg: #411C1A;
     --pie-lo: #4B3F78;
     --pie-hi: #C9B6FF;
     color-scheme: dark
@@ -119,6 +131,12 @@ img {
   --aside: #261D3F;
   --aside-line: #3A2F5C;
   --bar-rest: #4B3F78;
+  --good: #6FDC9A;
+  --good-bg: #17382A;
+  --mid: #FFD27A;
+  --mid-bg: #3D3010;
+  --low: #FF9A92;
+  --low-bg: #411C1A;
   --pie-lo: #4B3F78;
   --pie-hi: #C9B6FF;
   color-scheme: dark
@@ -2032,14 +2050,31 @@ main.wrap {
   font-variant-numeric: tabular-nums
 }
 
-.val.best {
-  color: var(--brand);
-  background: color-mix(in srgb, var(--brand) 12%, var(--surface))
+.val.good {
+  color: var(--good);
+  background: var(--good-bg)
 }
 
-.val.best::before {
-  content: "▲";
-  font-size: .75em
+.val.mid {
+  color: var(--mid);
+  background: var(--mid-bg)
+}
+
+.val.low {
+  color: var(--low);
+  background: var(--low-bg)
+}
+
+.val.good::before {
+  content: "▲"
+}
+
+.val.low::before {
+  content: "▼"
+}
+
+.val.mid::before {
+  content: "●"
 }
 
 /* mobile: en vez de la tabla ancha, selector de aspecto + lista de carreras + ficha */

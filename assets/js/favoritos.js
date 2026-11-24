@@ -93,8 +93,8 @@
   }
 
   /* ---------- tabla ---------- */
-  // meas: valores medibles. Se marca solo la mejor (o las empatadas) con el violeta de la marca,
-  // igual que en los gráficos; si todas valen lo mismo no se marca ninguna
+  // meas: valores medibles. Se pintan según su posición entre las carreras comparadas
+  // (verde = mejor, rojo = más exigente, ámbar = intermedio; la demanda nunca va en rojo)
   const ROWS = [
     ['Tipo de carrera', c => c.tipo],
     ['Modalidad', c => `<span class="chip mod">${MOD[c.t]}</span>`, c => `t-${c.t}`],
@@ -102,17 +102,17 @@
     ['Costo', costChip],
     ['Ubicación', c => c.ubic],
     ['Requisitos de ingreso', c => c.req],
-    ['Demanda laboral', c => DEM[c.dem], null, {key: c => c.dem}],
+    ['Demanda laboral', c => DEM[c.dem], null, {key: c => c.dem, soft: true}],
     ['Salario inicial*', c => `$${c.sal[0]}–${c.sal[1]}k`, null, {key: c => c.sal[1]}],
     ['Plan de estudios', c => c.plan],
     ['Posgrado', c => c.pos],
     ['Trabajo remoto', c => c.remoto],
   ];
-  const isBest = (meas, c, rows) => {
-    const ks = rows.map(meas.key), hi = Math.max(...ks);
-    return hi !== Math.min(...ks) && meas.key(c) === hi;
+  const tier = (meas, c, rows) => {
+    const ks = rows.map(meas.key), hi = Math.max(...ks), lo = Math.min(...ks), k = meas.key(c);
+    return hi === lo ? 'mid' : k === hi ? 'good' : k === lo && !meas.soft ? 'low' : 'mid';
   };
-  const cell = ([, fn, , meas], c, rows) => meas && isBest(meas, c, rows) ? `<span class="val best">${fn(c)}</span>` : fn(c);
+  const cell = ([, fn, , meas], c, rows) => meas ? `<span class="val ${tier(meas, c, rows)}">${fn(c)}</span>` : fn(c);
 
   let pinned = null;   // nombre de la carrera fijada en la grilla
   function drawTable(rows) {
