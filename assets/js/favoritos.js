@@ -35,10 +35,13 @@
   // en celular el dibujo cambia: con el ancho de escritorio el texto quedaría diminuto
   const narrowMQ = matchMedia('(max-width:720px)');
 
-  // barras: todas del mismo color; la mejor (o las empatadas) en el violeta de la marca.
-  // En celular el nombre va arriba de cada barra
+  // barras: el color sale de la misma paleta que la torta (de --pie-lo a --pie-hi) y depende del valor:
+  // la barra más larga es la más intensa y la más corta la más clara; las empatadas llevan el mismo tono.
+  // La mejor se distingue por el nombre en negrita. En celular el nombre va arriba de cada barra
   function panelSVG(p, rows, best) {
     const sm = narrowMQ.matches;
+    const vals = rows.map(r => p.span(r)[1]), hi = Math.max(...vals), lo = Math.min(...vals);
+    const tone = v => `color-mix(in oklch, var(--pie-hi) ${hi === lo ? 100 : Math.round((v - lo) / (hi - lo) * 100)}%, var(--pie-lo))`;
     const W = sm ? 320 : 560, L = sm ? 10 : 205, R = sm ? 290 : 505, rowH = sm ? 50 : 36, top = 4, H = top + rows.length * rowH + 24;
     const x = v => L + (v - p.min) / (p.max - p.min) * (R - L);
     let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${p.title}: ${rows.map(r => `${r.name} ${p.label(r)}`).join(', ')}">`;
@@ -46,7 +49,7 @@
     rows.forEach((r, i) => {
       const y = top + i * rowH + 8, [a, b] = p.span(r), top1 = p.key(r) === best;
       s += `<text class="rl${top1 ? ' best' : ''}" x="${sm ? L : 0}" y="${sm ? y + 4 : y + 15}">${r.name}</text>
-        <rect x="${x(a)}" y="${sm ? y + 12 : y}" width="${Math.max(x(b) - x(a), 4)}" height="${sm ? 16 : 20}" rx="6" style="fill:${top1 ? 'var(--brand)' : 'var(--bar-rest)'}"/>
+        <rect x="${x(a)}" y="${sm ? y + 12 : y}" width="${Math.max(x(b) - x(a), 4)}" height="${sm ? 16 : 20}" rx="6" style="fill:${tone(b)}"/>
         ${p.noValue ? '' : `<text class="vl" x="${x(b) + 8}" y="${y + 15}">${p.label(r)}</text>`}`;
     });
     return s + '</svg>';
