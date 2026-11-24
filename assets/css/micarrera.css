@@ -1751,6 +1751,12 @@ main.wrap {
   font-size: 12px
 }
 
+.chart .pl {
+  fill: var(--ink);
+  font-size: 13px;
+  font-weight: 600
+}
+
 .chart .pie-arrow {
   stroke: var(--ink);
   stroke-width: 1.2

@@ -72,7 +72,7 @@
       const g = groups.find(x => x.rows[0].sal[0] === r.sal[0] && x.rows[0].sal[1] === r.sal[1]);
       g ? g.rows.push(r) : groups.push({rows: [r], color: r.color, value: (r.sal[0] + r.sal[1]) / 2});
     });
-    const total = groups.reduce((a, g) => a + g.value, 0), cx = 188, cy = 115, R = 60, out = 22;
+    const total = groups.reduce((a, g) => a + g.value, 0), cx = 280, cy = 105, R = 62, out = 22;
     let ang = -Math.PI / 2;
     let slices = '', arrows = '';
     groups.forEach(g => {
@@ -84,16 +84,16 @@
       const x1 = cx + R * .62 * c, y1 = cy + R * .62 * sn, x2 = cx + (R + out) * c, y2 = cy + (R + out) * sn;
       const anchor = Math.abs(c) < .25 ? 'middle' : c > 0 ? 'start' : 'end';
       const tx = x2 + (anchor === 'middle' ? 0 : c > 0 ? 6 : -6);
-      const ty = anchor === 'middle' && sn < 0 ? y2 - 6 - (g.rows.length - 1) * 12 : anchor === 'middle' ? y2 + 12 : y2 + 3 - (g.rows.length - 1) * 6;
+      const ty = anchor === 'middle' && sn < 0 ? y2 - 8 - (g.rows.length - 1) * 17 : anchor === 'middle' ? y2 + 16 : y2 + 4 - (g.rows.length - 1) * 8.5;
       arrows += `<line class="pie-arrow" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" marker-end="url(#pieHead)"/>
-        <text class="rl" x="${tx}" y="${ty}" text-anchor="${anchor}">${g.rows.map((r, i) => `<tspan x="${tx}"${i ? ' dy="12"' : ''}>${r.short}</tspan>`).join('')}</text>`;
+        <text class="pl" x="${tx}" y="${ty}" text-anchor="${anchor}">${g.rows.map((r, i) => `<tspan x="${tx}"${i ? ' dy="17"' : ''}>${r.name}</tspan>`).join('')}</text>`;
       ang = end;
     });
     const label = groups.map(g => `${g.rows.map(r => r.name).join(' y ')} ${p.label(g.rows[0])}`).join(', ');
-    return `<svg viewBox="0 0 376 230" role="img" aria-label="${p.title}: ${label}">
+    return `<svg viewBox="0 0 560 240" role="img" aria-label="${p.title}: ${label}">
       <defs><marker id="pieHead" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8z" class="pie-head"/></marker></defs>
       ${slices}${arrows}</svg>
-      <ul class="pie-legend">${groups.map(g => `<li style="--tone:${g.color}"><span class="sw"></span>${p.label(g.rows[0])}</li>`).join('')}</ul>`;
+      <ul class="pie-legend">${groups.map(g => `<li style="--tone:${g.color}"><span class="sw"></span>Rango salarial de $${g.rows[0].sal[0]}k a $${g.rows[0].sal[1]}k</li>`).join('')}</ul>`;
   }
 
   /* ---------- tabla ---------- */
