@@ -1073,13 +1073,28 @@ main.wrap {
 
 .res {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto auto;
   gap: 20px;
   align-items: center;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 18px 20px
+}
+
+.res .ficha {
+  order: 2;
+  width: 56px;
+  height: 56px;
+  border-radius: 12px
+}
+
+.res .ficha b {
+  font-size: 1.35rem
+}
+
+.res-act {
+  order: 3
 }
 
 .res-main {
@@ -1186,8 +1201,12 @@ main.wrap {
 }
 
 .block h4 {
-  font-size: 1.1rem;
-  font-weight: 700
+  font-size: 1.5rem;
+  font-weight: 800
+}
+
+.detail-main b {
+  color: var(--brand)
 }
 
 .block p {
@@ -1732,6 +1751,39 @@ main.wrap {
   font-size: 12px
 }
 
+.cmp-layout .chart svg.pie {
+  max-width: 220px;
+  margin-inline: auto
+}
+
+.pie-legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+  font-size: .86rem
+}
+
+.pie-legend li {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start
+}
+
+.pie-legend .sw {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex: none;
+  margin-top: 4px;
+  background: var(--tone)
+}
+
+.cmp-m-note {
+  margin: 0 0 12px
+}
+
 .chart .grid {
   stroke: var(--line);
   stroke-width: 1
@@ -2206,6 +2258,10 @@ footer .wrap {
   align-items: start
 }
 
+.contact-one {
+  grid-template-columns: minmax(0, 1fr)
+}
+
 .panel {
   background: var(--surface);
   border: 1px solid var(--line);
@@ -2239,37 +2295,6 @@ footer .wrap {
 
 .panel .foot-ic .i {
   color: inherit
-}
-
-.field textarea {
-  width: 100%;
-  min-height: 130px;
-  resize: vertical;
-  font: 500 .95rem var(--text);
-  color: var(--ink);
-  background: var(--surface);
-  border: 1.5px solid var(--line);
-  border-radius: 10px;
-  padding: 11px 12px
-}
-
-.field textarea:focus-visible {
-  outline: 3px solid var(--focus);
-  outline-offset: 1px
-}
-
-.field textarea[aria-invalid="true"] {
-  border-color: var(--err)
-}
-
-.form-ok {
-  padding: 12px 14px;
-  border-radius: 10px;
-  border: 1.5px solid var(--good);
-  background: var(--good-bg);
-  color: var(--good);
-  font-weight: 600;
-  font-size: .92rem
 }
 
 .faq {
@@ -2518,7 +2543,7 @@ footer .wrap {
   }
 
   .res {
-    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) auto;
     gap: 16px
   }
 
