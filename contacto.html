@@ -45,10 +45,10 @@
   <section class="sec info" aria-labelledby="h-contacto">
     <header class="sec-head">
       <h2 id="h-contacto">Contacto</h2>
-      <p>¿Tenés dudas sobre alguna carrera o sobre cómo usar MiCarrera? Escribinos y te respondemos en un día hábil.</p>
+      <p>¿Tenés dudas sobre alguna carrera o sobre cómo usar MiCarrera? Escribinos o llamanos.</p>
     </header>
 
-    <div class="info-grid">
+    <div class="info-grid contact-one">
       <aside class="panel tone" aria-label="Datos de contacto">
         <h3>Hablemos</h3>
         <ul>
@@ -56,18 +56,8 @@
           <li class="foot-ic"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg>+54 11 4555-0123</li>
           <li class="foot-ic"><svg class="i" aria-hidden="true"><use href="#i-pin"/></svg>Buenos Aires, Argentina</li>
         </ul>
-        <p class="demo auth-side-note">Atención de lunes a viernes, de 9 a 18 h.</p>
+        <p>Atención de lunes a viernes, de 9 a 18 h.</p>
       </aside>
-
-      <div class="panel">
-        <div class="form-ok" id="contactOk" role="status" hidden>¡Gracias! Recibimos tu mensaje y te vamos a responder pronto.</div>
-        <form class="auth-form" id="contactForm" novalidate>
-          <div class="field"><label for="cName">Nombre</label><input id="cName" name="name" type="text" autocomplete="name"><p class="err" id="cNameErr" hidden></p></div>
-          <div class="field"><label for="cEmail">Correo electrónico</label><input id="cEmail" name="email" type="email" autocomplete="email" placeholder="nombre@correo.com"><p class="err" id="cEmailErr" hidden></p></div>
-          <div class="field"><label for="cMsg">Mensaje</label><textarea id="cMsg" name="msg"></textarea><p class="err" id="cMsgErr" hidden></p></div>
-          <button class="btn btn-primary" type="submit">Enviar mensaje</button>
-        </form>
-      </div>
     </div>
   </section>
 </main>
@@ -84,7 +74,7 @@
         <li class="foot-ic"><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg><a href="mailto:hola@micarrera.ar">hola@micarrera.ar</a></li>
         <li class="foot-ic"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg><a href="tel:+541145550123">+54 11 4555-0123</a></li>
         <li class="foot-ic"><svg class="i" aria-hidden="true"><use href="#i-pin"/></svg>Buenos Aires, Argentina</li>
-        <li><a href="contacto.html">Formulario de contacto</a></li>
+        <li><a href="contacto.html">Página de contacto</a></li>
       </ul>
     </div>
     <div>
@@ -102,28 +92,5 @@
 
 <script src="assets/js/auth.js"></script>
 <script src="assets/js/micarrera.js"></script>
-<script>
-(() => {
-  const $ = id => document.getElementById(id);
-  const form = $('contactForm');
-  const u = MC.user();
-  if (u) { $('cName').value = u.name; $('cEmail').value = u.email; }
-  const fail = (f, msg) => { $(f).setAttribute('aria-invalid', 'true'); const e = $(f + 'Err'); e.textContent = msg; e.hidden = false; };
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    form.querySelectorAll('input,textarea').forEach(i => i.removeAttribute('aria-invalid'));
-    form.querySelectorAll('.err').forEach(p => { p.hidden = true; });
-    $('contactOk').hidden = true;
-    const bad = [];
-    if (!$('cName').value.trim()) bad.push(['cName', 'Ingresá tu nombre.']);
-    if (!/^\S+@\S+\.\S+$/.test($('cEmail').value.trim())) bad.push(['cEmail', 'Ingresá un correo válido.']);
-    if ($('cMsg').value.trim().length < 10) bad.push(['cMsg', 'Escribí un mensaje de al menos 10 caracteres.']);
-    bad.forEach(([f, m]) => fail(f, m));
-    if (bad.length) { $(bad[0][0]).focus(); return; }
-    form.reset();
-    $('contactOk').hidden = false;
-  });
-})();
-</script>
 </body>
 </html>

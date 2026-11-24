@@ -34,34 +34,54 @@
 
   /* ---------- gráficos ---------- */
   const panels = [
-    {title: 'Duración', sub: 'En años de cursada', min: 0, max: 6, ticks: [0, 2, 4, 6], tick: v => v, span: r => [0, r.years], label: r => `${r.years} años`, key: r => -r.years, win: 'Más corta'},
-    {title: 'Salario inicial estimado', sub: 'Rango en miles de pesos*', min: 30, max: 60, ticks: [30, 40, 50, 60], tick: v => `$${v}k`, span: r => r.sal, label: r => `$${r.sal[0]}–${r.sal[1]}k`, key: r => r.sal[1], win: 'Rango más alto'},
-    {title: 'Demanda laboral', sub: 'Búsquedas activas de empleo', min: 0, max: 3, ticks: [1, 2, 3], tick: v => DEM[v], span: r => [0, r.dem], label: r => DEM[r.dem], key: r => r.dem, win: 'Mayor demanda'},
+    {title: 'Duración', sub: 'En años de cursada', min: 0, max: 6, ticks: [0, 2, 4, 6], tick: v => v, span: r => [0, r.years], label: r => `${r.years} años`, noValue: true, key: r => -r.years, win: 'Más corta'},
+    {title: 'Salario inicial estimado', sub: 'Rango en miles de pesos*', pie: true, label: r => `$${r.sal[0]}–${r.sal[1]}k`, key: r => r.sal[1], win: 'Rango más alto'},
+    {title: 'Demanda laboral', sub: 'Búsquedas activas de empleo', min: 0, max: 3, ticks: [1, 2, 3], tick: v => DEM[v], span: r => [0, r.dem], label: r => DEM[r.dem], noValue: true, key: r => r.dem, win: 'Mayor demanda'},
   ];
-  // parte el nombre en dos líneas equilibradas: "Ingeniería en" / "Sistemas"
-  function wrap(name) {
-    const w = name.split(' ');
-    if (w.length < 2) return [name];
-    let best = 1, diff = Infinity;
-    for (let i = 1; i < w.length; i++) {
-      const d = Math.abs(w.slice(0, i).join(' ').length - w.slice(i).join(' ').length);
-      if (d < diff) { diff = d; best = i; }
-    }
-    return [w.slice(0, best).join(' '), w.slice(best).join(' ')];
-  }
   function panelSVG(p, rows) {
-    const W = 376, L = 124, R = 284, rowH = 42, top = 4, H = top + rows.length * rowH + 24;
+    const W = 560, L = 205, R = 505, rowH = 36, top = 4, H = top + rows.length * rowH + 24;
     const x = v => L + (v - p.min) / (p.max - p.min) * (R - L);
     let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${p.title}: ${rows.map(r => `${r.name} ${p.label(r)}`).join(', ')}">`;
     for (const t of p.ticks) s += `<line class="grid" x1="${x(t)}" x2="${x(t)}" y1="${top}" y2="${H - 20}"/><text class="tick" x="${x(t)}" y="${H - 5}" text-anchor="middle">${p.tick(t)}</text>`;
     rows.forEach((r, i) => {
       const y = top + i * rowH + 8, [a, b] = p.span(r);
-      const [l1, l2] = wrap(r.name);
-      s += `<text class="rl" x="0" y="${l2 ? y + 5 : y + 15}">${l1}${l2 ? `<tspan x="0" dy="14">${l2}</tspan>` : ''}</text>
+      s += `<text class="rl" x="0" y="${y + 15}">${r.name}</text>
         <rect x="${x(a)}" y="${y}" width="${Math.max(x(b) - x(a), 4)}" height="20" rx="6" style="fill:${r.color}"/>
-        <text class="vl" x="${x(b) + 8}" y="${y + 15}">${p.label(r)}</text>`;
+        ${p.noValue ? '' : `<text class="vl" x="${x(b) + 8}" y="${y + 15}">${p.label(r)}</text>`}`;
     });
     return s + '</svg>';
+  }
+
+  // torta de salarios: las carreras con el mismo rango se unifican en una sola porción;
+  // de cada porción sale una flecha hacia las carreras que incluye
+  function pieChart(p, rows) {
+    const groups = [];
+    rows.forEach(r => {
+      const g = groups.find(x => x.rows[0].sal[0] === r.sal[0] && x.rows[0].sal[1] === r.sal[1]);
+      g ? g.rows.push(r) : groups.push({rows: [r], color: r.color, value: (r.sal[0] + r.sal[1]) / 2});
+    });
+    const total = groups.reduce((a, g) => a + g.value, 0), cx = 280, cy = 105, R = 62, out = 22;
+    let ang = -Math.PI / 2;
+    let slices = '', arrows = '';
+    groups.forEach(g => {
+      const a = g.value / total * 2 * Math.PI, end = ang + a, mid = ang + a / 2;
+      slices += groups.length === 1
+        ? `<circle cx="${cx}" cy="${cy}" r="${R}" style="fill:${g.color}"/>`
+        : `<path d="M${cx} ${cy}L${cx + R * Math.cos(ang)} ${cy + R * Math.sin(ang)}A${R} ${R} 0 ${a > Math.PI ? 1 : 0} 1 ${cx + R * Math.cos(end)} ${cy + R * Math.sin(end)}Z" style="fill:${g.color};stroke:var(--surface);stroke-width:2"/>`;
+      const c = Math.cos(mid), sn = Math.sin(mid);
+      const x1 = cx + R * .62 * c, y1 = cy + R * .62 * sn, x2 = cx + (R + out) * c, y2 = cy + (R + out) * sn;
+      const anchor = Math.abs(c) < .25 ? 'middle' : c > 0 ? 'start' : 'end';
+      const tx = x2 + (anchor === 'middle' ? 0 : c > 0 ? 6 : -6);
+      const ty = anchor === 'middle' && sn < 0 ? y2 - 8 - (g.rows.length - 1) * 17 : anchor === 'middle' ? y2 + 16 : y2 + 4 - (g.rows.length - 1) * 8.5;
+      arrows += `<line class="pie-arrow" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" marker-end="url(#pieHead)"/>
+        <text class="pl" x="${tx}" y="${ty}" text-anchor="${anchor}">${g.rows.map((r, i) => `<tspan x="${tx}"${i ? ' dy="17"' : ''}>${r.name}</tspan>`).join('')}</text>`;
+      ang = end;
+    });
+    const label = groups.map(g => `${g.rows.map(r => r.name).join(' y ')} ${p.label(g.rows[0])}`).join(', ');
+    return `<svg viewBox="0 0 560 240" role="img" aria-label="${p.title}: ${label}">
+      <defs><marker id="pieHead" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8z" class="pie-head"/></marker></defs>
+      ${slices}${arrows}</svg>
+      <ul class="pie-legend">${groups.map(g => `<li style="--tone:${g.color}"><span class="sw"></span>Rango salarial de $${g.rows[0].sal[0]}k a $${g.rows[0].sal[1]}k</li>`).join('')}</ul>`;
   }
 
   /* ---------- tabla ---------- */
@@ -133,7 +153,8 @@
     if (!rows.length) return;
     let cur = rows.find(r => r.name === mSel);
     if (!cur) { cur = rows[0]; mSel = cur.name; }
-    mob.innerHTML = `<div class="field"><label for="cmpCareer">Carrera</label>
+    mob.innerHTML = `<p class="note cmp-m-note">La comparación se hace en desktop: en mobile la tabla muestra una sola carrera por vez.</p>
+      <div class="field"><label for="cmpCareer">Carrera</label>
       <select id="cmpCareer">${rows.map(r => `<option value="${r.name}"${r === cur ? ' selected' : ''}>${r.name}</option>`).join('')}</select></div>
       <div class="cmp-m-head" style="--tone:${cur.color}"><span class="sw"></span>${cur.name}<small>${cur.uni}</small></div>
       <table class="cmp-m-table"><tbody>${ROWS.map(row =>
@@ -160,7 +181,7 @@
     $('charts').innerHTML = rows.length ? panels.map(p => {
       const best = Math.max(...rows.map(p.key));
       const winners = rows.filter(r => p.key(r) === best).map(r => r.short).join(' y ');
-      return `<figure class="chart"><figcaption><b>${p.title}</b><span>${p.sub}</span></figcaption>${panelSVG(p, rows)}<p class="win">${p.win}: ${winners}</p></figure>`;
+      return `<figure class="chart"><figcaption><b>${p.title}</b><span>${p.sub}</span></figcaption>${p.pie ? pieChart(p, rows) : `${panelSVG(p, rows)}<p class="win">${p.win}: ${winners}</p>`}</figure>`;
     }).join('') : '<p class="note">Seleccioná al menos una carrera para ver los gráficos.</p>';
     $('cmpTableWrap').hidden = $('cmpTools').hidden = !rows.length;
     if (rows.length) drawTable(rows);
