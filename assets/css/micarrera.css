@@ -1736,7 +1736,7 @@ main.wrap {
 
 .chart .rl {
   fill: var(--ink);
-  font-size: 0.625em;
+  font-size: 13px;
   font-weight: 600
 }
 
@@ -1858,7 +1858,8 @@ main.wrap {
 }
 
 .cmp-layout .chart svg {
-  max-width: 560px
+  max-width: 560px;
+  margin-inline: auto
 }
 
 .table-scroll {

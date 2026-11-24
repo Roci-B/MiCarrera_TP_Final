@@ -38,26 +38,14 @@
     {title: 'Salario inicial estimado', sub: 'Rango en miles de pesos*', pie: true, label: r => `$${r.sal[0]}–${r.sal[1]}k`, key: r => r.sal[1], win: 'Rango más alto'},
     {title: 'Demanda laboral', sub: 'Búsquedas activas de empleo', min: 0, max: 3, ticks: [1, 2, 3], tick: v => DEM[v], span: r => [0, r.dem], label: r => DEM[r.dem], noValue: true, key: r => r.dem, win: 'Mayor demanda'},
   ];
-  // parte el nombre en dos líneas equilibradas: "Ingeniería en" / "Sistemas"
-  function wrap(name) {
-    const w = name.split(' ');
-    if (w.length < 2) return [name];
-    let best = 1, diff = Infinity;
-    for (let i = 1; i < w.length; i++) {
-      const d = Math.abs(w.slice(0, i).join(' ').length - w.slice(i).join(' ').length);
-      if (d < diff) { diff = d; best = i; }
-    }
-    return [w.slice(0, best).join(' '), w.slice(best).join(' ')];
-  }
   function panelSVG(p, rows) {
-    const W = 376, L = 124, R = 284, rowH = 42, top = 4, H = top + rows.length * rowH + 24;
+    const W = 560, L = 205, R = 505, rowH = 36, top = 4, H = top + rows.length * rowH + 24;
     const x = v => L + (v - p.min) / (p.max - p.min) * (R - L);
     let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${p.title}: ${rows.map(r => `${r.name} ${p.label(r)}`).join(', ')}">`;
     for (const t of p.ticks) s += `<line class="grid" x1="${x(t)}" x2="${x(t)}" y1="${top}" y2="${H - 20}"/><text class="tick" x="${x(t)}" y="${H - 5}" text-anchor="middle">${p.tick(t)}</text>`;
     rows.forEach((r, i) => {
       const y = top + i * rowH + 8, [a, b] = p.span(r);
-      const [l1, l2] = wrap(r.name);
-      s += `<text class="rl" x="0" y="${l2 ? y + 5 : y + 15}">${l1}${l2 ? `<tspan x="0" dy="14">${l2}</tspan>` : ''}</text>
+      s += `<text class="rl" x="0" y="${y + 15}">${r.name}</text>
         <rect x="${x(a)}" y="${y}" width="${Math.max(x(b) - x(a), 4)}" height="20" rx="6" style="fill:${r.color}"/>
         ${p.noValue ? '' : `<text class="vl" x="${x(b) + 8}" y="${y + 15}">${p.label(r)}</text>`}`;
     });
