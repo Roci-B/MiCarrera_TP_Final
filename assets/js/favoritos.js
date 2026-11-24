@@ -7,12 +7,6 @@
   const off = new Set();   // favoritas que el usuario destildó de la comparación
 
   const names = () => MC.user() ? MC.favs().filter(n => CARRERAS[n]) : [];
-  // paleta monocromática: los tonos se reparten de oscuro a claro según cuántas carreras haya,
-  // así siempre quedan lo más separados posible (extremos --cmp-l-from/--cmp-l-to en el CSS)
-  const shade = (i, n) => {
-    const t = n < 2 ? 0 : i / (n - 1);
-    return `hsl(calc(250 + ${30 * t}) 62% calc(var(--cmp-l-from) + (var(--cmp-l-to) - var(--cmp-l-from)) * ${t}))`;
-  };
   const costChip = c => c.free ? '<span class="chip gratis">Gratuita</span>' : '<span class="chip">Arancelada</span>';
 
   /* ---------- tarjetas y leyenda ---------- */
@@ -27,9 +21,9 @@
       <div class="fav-act"><a class="btn btn-primary" href="index.html#detalle">Ver detalle</a><button class="btn btn-ghost" type="button"><svg class="i"><use href="#i-phone"/></svg>Contacto</button></div>
     </article>`;
   };
-  const legendItem = (n, i, total) => {
+  const legendItem = n => {
     const c = CARRERAS[n];
-    return `<li style="--tone:${shade(i, total)}"><label><input type="checkbox" value="${n}"${off.has(n) ? '' : ' checked'}><span><b>${n}</b><span>${c.uni}, ${MOD[c.t].toLowerCase()}</span></span></label></li>`;
+    return `<li><label><input type="checkbox" value="${n}"${off.has(n) ? '' : ' checked'}><span><b>${n}</b><span>${c.uni}, ${MOD[c.t].toLowerCase()}</span></span></label></li>`;
   };
 
   /* ---------- gráficos ---------- */
@@ -99,8 +93,8 @@
   }
 
   /* ---------- tabla ---------- */
-  // meas: valores medibles. Se pintan según su posición entre las carreras comparadas
-  // (verde = mejor, rojo = más exigente, ámbar = intermedio; la demanda nunca va en rojo)
+  // meas: valores medibles. Se marca solo la mejor (o las empatadas) con el violeta de la marca,
+  // igual que en los gráficos; si todas valen lo mismo no se marca ninguna
   const ROWS = [
     ['Tipo de carrera', c => c.tipo],
     ['Modalidad', c => `<span class="chip mod">${MOD[c.t]}</span>`, c => `t-${c.t}`],
@@ -108,17 +102,17 @@
     ['Costo', costChip],
     ['Ubicación', c => c.ubic],
     ['Requisitos de ingreso', c => c.req],
-    ['Demanda laboral', c => DEM[c.dem], null, {key: c => c.dem, soft: true}],
+    ['Demanda laboral', c => DEM[c.dem], null, {key: c => c.dem}],
     ['Salario inicial*', c => `$${c.sal[0]}–${c.sal[1]}k`, null, {key: c => c.sal[1]}],
     ['Plan de estudios', c => c.plan],
     ['Posgrado', c => c.pos],
     ['Trabajo remoto', c => c.remoto],
   ];
-  const tier = (meas, c, rows) => {
-    const ks = rows.map(meas.key), hi = Math.max(...ks), lo = Math.min(...ks), k = meas.key(c);
-    return hi === lo ? 'mid' : k === hi ? 'good' : k === lo && !meas.soft ? 'low' : 'mid';
+  const isBest = (meas, c, rows) => {
+    const ks = rows.map(meas.key), hi = Math.max(...ks);
+    return hi !== Math.min(...ks) && meas.key(c) === hi;
   };
-  const cell = ([, fn, , meas], c, rows) => meas ? `<span class="val ${tier(meas, c, rows)}">${fn(c)}</span>` : fn(c);
+  const cell = ([, fn, , meas], c, rows) => meas && isBest(meas, c, rows) ? `<span class="val best">${fn(c)}</span>` : fn(c);
 
   let pinned = null;   // nombre de la carrera fijada en la grilla
   function drawTable(rows) {
@@ -127,9 +121,9 @@
     table.style.minWidth = `${200 + rows.length * 190}px`;
     table.classList.toggle('pinned', !!pinned);
     table.innerHTML = `<thead><tr><th scope="col">Aspecto</th>${rows.map((r, j) =>
-      `<th scope="col" data-col="${j + 1}" style="--tone:${r.color}"${r.name === pinned ? ' class="pin"' : ''}><button type="button" aria-pressed="${r.name === pinned}" title="Fijar esta carrera" data-name="${r.name}"><span class="sw"></span>${r.name}<span>${r.uni}</span></button></th>`).join('')}</tr></thead>
+      `<th scope="col" data-col="${j + 1}"${r.name === pinned ? ' class="pin"' : ''}><button type="button" aria-pressed="${r.name === pinned}" title="Fijar esta carrera" data-name="${r.name}">${r.name}<span>${r.uni}</span></button></th>`).join('')}</tr></thead>
       <tbody>${ROWS.map(row => `<tr><th scope="row">${row[0]}</th>${rows.map((r, j) =>
-        `<td data-col="${j + 1}"${r.name === pinned ? ' style="--tone:' + r.color + '"' : ''} class="${[row[2] ? row[2](r) : '', r.name === pinned ? 'pin' : ''].join(' ').trim()}">${cell(row, r, rows)}</td>`).join('')}</tr>`).join('')}</tbody>`;
+        `<td data-col="${j + 1}" class="${[row[2] ? row[2](r) : '', r.name === pinned ? 'pin' : ''].join(' ').trim()}">${cell(row, r, rows)}</td>`).join('')}</tr>`).join('')}</tbody>`;
   }
 
   // cruz de resaltado: al pasar por una celda se marcan su fila y su columna
@@ -170,7 +164,7 @@
     mob.innerHTML = `<p class="note cmp-m-note">La comparación se hace en desktop: en mobile la tabla muestra una sola carrera por vez.</p>
       <div class="field"><label for="cmpCareer">Carrera</label>
       <select id="cmpCareer">${rows.map(r => `<option value="${r.name}"${r === cur ? ' selected' : ''}>${r.name}</option>`).join('')}</select></div>
-      <div class="cmp-m-head" style="--tone:${cur.color}"><span class="sw"></span>${cur.name}<small>${cur.uni}</small></div>
+      <div class="cmp-m-head">${cur.name}<small>${cur.uni}</small></div>
       <table class="cmp-m-table"><tbody>${ROWS.map(row =>
         `<tr><th scope="row">${row[0]}</th><td${row[2] ? ` class="${row[2](cur)}"` : ''}>${cell(row, cur, rows)}</td></tr>`).join('')}</tbody></table>`;
   }
@@ -188,7 +182,7 @@
   /* ---------- armado ---------- */
   function drawCmp() {
     const list = names();
-    const rows = list.filter(n => !off.has(n)).map(n => ({name: n, ...CARRERAS[n], color: shade(list.indexOf(n), list.length)}));
+    const rows = list.filter(n => !off.has(n)).map(n => ({name: n, ...CARRERAS[n]}));
     const btn = $('cmpBtn');
     btn.textContent = `Comparar seleccionadas (${rows.length})`;
     btn.setAttribute('aria-disabled', rows.length < 2);
@@ -207,7 +201,7 @@
   function render() {
     const list = names();
     $('favGrid').innerHTML = list.map(card).join('');
-    $('cmpLegend').innerHTML = list.map((n, i) => legendItem(n, i, list.length)).join('');
+    $('cmpLegend').innerHTML = list.map(n => legendItem(n)).join('');
     $('comparar').hidden = !list.length;
     drawCmp();
   }
