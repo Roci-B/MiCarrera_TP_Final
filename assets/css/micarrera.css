@@ -2122,6 +2122,219 @@ footer .wrap {
   padding-block: 28px
 }
 
+/* ---------- footer del sitio ---------- */
+.site-foot {
+  background: var(--sunk);
+  margin-top: 24px
+}
+
+.foot-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1.4fr;
+  gap: 32px;
+  padding-block: 40px 24px !important
+}
+
+.site-foot h3 {
+  margin: 0 0 12px;
+  font-family: var(--display);
+  font-stretch: 112%;
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--ink)
+}
+
+.site-foot ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px
+}
+
+.site-foot p {
+  margin: 8px 0 0
+}
+
+.site-foot a {
+  color: var(--muted);
+  text-decoration: none
+}
+
+.site-foot a:hover {
+  color: var(--brand);
+  text-decoration: underline
+}
+
+.site-foot a:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 4px
+}
+
+.site-foot .logo {
+  color: var(--ink)
+}
+
+.foot-ic {
+  display: flex;
+  gap: 8px;
+  align-items: center
+}
+
+.foot-ic .i {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  color: var(--brand)
+}
+
+.foot-legal {
+  border-top: 1px solid var(--line);
+  padding-block: 16px !important
+}
+
+/* ---------- páginas informativas: contacto, preguntas, perfil ---------- */
+.info {
+  margin-block: 32px
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: 24px;
+  align-items: start
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 32px;
+  display: grid;
+  gap: 18px
+}
+
+.panel.tone {
+  background: var(--c-mod);
+  color: var(--on-tone);
+  border-color: transparent
+}
+
+.panel h2,
+.panel h3 {
+  margin: 0;
+  font-family: var(--display);
+  font-stretch: 112%;
+  font-weight: 800
+}
+
+.panel ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 14px
+}
+
+.panel .foot-ic .i {
+  color: inherit
+}
+
+.field textarea {
+  width: 100%;
+  min-height: 130px;
+  resize: vertical;
+  font: 500 .95rem var(--text);
+  color: var(--ink);
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  padding: 11px 12px
+}
+
+.field textarea:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 1px
+}
+
+.field textarea[aria-invalid="true"] {
+  border-color: var(--err)
+}
+
+.form-ok {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1.5px solid var(--good);
+  background: var(--good-bg);
+  color: var(--good);
+  font-weight: 600;
+  font-size: .92rem
+}
+
+.faq {
+  display: grid;
+  gap: 12px
+}
+
+.faq details {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 0 20px;
+  scroll-margin-top: 88px
+}
+
+.faq summary {
+  cursor: pointer;
+  padding-block: 16px;
+  font-weight: 700;
+  list-style-position: outside
+}
+
+.faq summary:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 8px
+}
+
+.faq details[open] {
+  border-color: var(--brand)
+}
+
+.faq details p {
+  margin: 0 0 16px;
+  color: var(--muted)
+}
+
+.faq .when {
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--brand)
+}
+
+
+
+
+
+
+
+
+
+@media (max-width:900px) {
+  .foot-grid {
+    grid-template-columns: minmax(0, 1fr)
+  }
+
+  .info-grid {
+    grid-template-columns: minmax(0, 1fr)
+  }
+
+  .panel {
+    padding: 24px 20px
+  }
+}
+
 /* ---------- responsive ---------- */
 @media (max-width:1060px) {
   .fav-grid {

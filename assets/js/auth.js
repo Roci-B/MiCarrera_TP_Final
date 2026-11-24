@@ -66,6 +66,7 @@
   }
   function syncAuth() {
     const u = user();
+    $$('[data-profile]').forEach(a => { a.hidden = !u; });
     $$('[data-auth]').forEach(a => {
       if (u) {
         a.textContent = `Salir (${u.name})`; a.href = '#'; a.className = 'btn btn-ghost';

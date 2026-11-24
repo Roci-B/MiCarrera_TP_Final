@@ -108,7 +108,9 @@
       <circle cx="19" cy="10" r="2.2" />
       <path d="M7 20a5 5 0 0 1 10 0M1.5 18a3.5 3.5 0 0 1 5-3.2M22.5 18a3.5 3.5 0 0 0-5-3.2" />
     </symbol>
-  </svg>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0 1 16 0"/></symbol>
+</svg>
 
   <header class="nav">
     <div class="wrap nav-in">
@@ -123,6 +125,7 @@
         <button class="btn-icon" id="themeToggle" type="button" aria-label="Cambiar a modo oscuro"><svg class="i">
             <use href="#i-moon" />
           </svg></button>
+        <a class="btn btn-ghost" data-profile href="perfil.html" hidden><svg class="i"><use href="#i-user"/></svg>Perfil</a>
         <a class="btn btn-ghost" href="#favoritos"><svg class="i">
             <use href="#i-heart" />
           </svg>Favoritos <span class="count" data-fav-count>0</span></a>
@@ -193,9 +196,33 @@
     </section>
   </main>
 
-  <footer>
-    <div class="wrap">MiCarrera. Prototipo de alta fidelidad con datos de ejemplo.</div>
-  </footer>
+  <footer class="site-foot">
+  <div class="wrap foot-grid">
+    <div>
+      <a class="logo" href="index.html#inicio"><span class="logo-mark" aria-hidden="true"></span>MiCarrera</a>
+      <p>Explorá, compará y elegí tu carrera universitaria en el Área Metropolitana de Buenos Aires.</p>
+    </div>
+    <div>
+      <h3>Contacto</h3>
+      <ul>
+        <li class="foot-ic"><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg><a href="mailto:hola@micarrera.ar">hola@micarrera.ar</a></li>
+        <li class="foot-ic"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg><a href="tel:+541145550123">+54 11 4555-0123</a></li>
+        <li class="foot-ic"><svg class="i" aria-hidden="true"><use href="#i-pin"/></svg>Buenos Aires, Argentina</li>
+        <li><a href="contacto.html">Formulario de contacto</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Preguntas recientes</h3>
+      <ul>
+        <li><a href="preguntas.html#p1">¿Cómo comparo dos carreras?</a></li>
+        <li><a href="preguntas.html#p2">¿Necesito cuenta para guardar favoritos?</a></li>
+        <li><a href="preguntas.html#p3">¿Los costos y salarios son reales?</a></li>
+        <li><a href="preguntas.html">Ver todas las preguntas</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap foot-legal">MiCarrera. Prototipo de alta fidelidad con datos de ejemplo.</div>
+</footer>
 
   <script src="assets/js/catalogo.js"></script>
   <script src="assets/js/auth.js"></script>
