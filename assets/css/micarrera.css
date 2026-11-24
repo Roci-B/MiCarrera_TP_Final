@@ -47,14 +47,15 @@ img {
   --p8: hsl(256 82% 75%);
   --p9: hsl(256 86% 79%);
   --p10: hsl(256 90% 83%);
-  --cmp-l-from: 24%;
-  --cmp-l-to: 66%;
+  --bar-rest: #B9A6EC;
   --good: #137A3F;
   --good-bg: #DDF3E4;
   --mid: #8A5A00;
   --mid-bg: #FFEFC7;
   --low: #B3261E;
   --low-bg: #FBE1DE;
+  --pie-lo: #C9B9F2;
+  --pie-hi: #241763;
   --display: "Archivo", "Arial Narrow", system-ui, sans-serif;
   --text: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
@@ -88,14 +89,15 @@ img {
     --tag-on-tone: #7E63E6;
     --aside: #261D3F;
     --aside-line: #3A2F5C;
-    --cmp-l-from: 46%;
-    --cmp-l-to: 84%;
+    --bar-rest: #4B3F78;
     --good: #6FDC9A;
     --good-bg: #17382A;
     --mid: #FFD27A;
     --mid-bg: #3D3010;
     --low: #FF9A92;
     --low-bg: #411C1A;
+    --pie-lo: #4B3F78;
+    --pie-hi: #C9B6FF;
     color-scheme: dark
   }
 }
@@ -128,14 +130,15 @@ img {
   --tag-on-tone: #7E63E6;
   --aside: #261D3F;
   --aside-line: #3A2F5C;
-  --cmp-l-from: 46%;
-  --cmp-l-to: 84%;
+  --bar-rest: #4B3F78;
   --good: #6FDC9A;
   --good-bg: #17382A;
   --mid: #FFD27A;
   --mid-bg: #3D3010;
   --low: #FF9A92;
   --low-bg: #411C1A;
+  --pie-lo: #4B3F78;
+  --pie-hi: #C9B6FF;
   color-scheme: dark
 }
 
@@ -1740,6 +1743,18 @@ main.wrap {
   font-weight: 600
 }
 
+.chart .rl.best {
+  font-weight: 800
+}
+
+/* halo del color de la tarjeta: las líneas de la grilla no cruzan los nombres */
+.chart .rl {
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 4px;
+  stroke-linejoin: round
+}
+
 .chart .vl {
   fill: var(--ink);
   font-size: 13.5px;
@@ -1766,28 +1781,67 @@ main.wrap {
   fill: var(--ink)
 }
 
-.pie-legend {
-  list-style: none;
+.chart .pl-range {
+  font-weight: 800
+}
+
+/* torta: la porción se agranda y se separa un poco al pasar el mouse */
+.chart svg.pie {
+  overflow: visible
+}
+
+.pie-slice {
+  stroke: var(--surface);
+  stroke-width: 2;
+  transform-box: view-box;
+  transition: transform .22s cubic-bezier(.2, .8, .2, 1)
+}
+
+.pie-slice:hover {
+  transform: translate(var(--dx), var(--dy)) scale(1.04)
+}
+
+.pie-key {
   margin: 0;
-  padding: 0;
-  display: grid;
+  display: flex;
+  align-items: center;
   gap: 8px;
   font-size: .86rem;
   font-weight: 650
 }
 
-.pie-legend li {
+.pie-key .ramp {
   display: flex;
-  gap: 8px;
-  align-items: center
+  gap: 2px
 }
 
-.pie-legend .sw {
+.pie-key .ramp span {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px
+}
+
+.pie-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+  font-size: .9rem
+}
+
+.pie-list li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start
+}
+
+.pie-list .sw {
   width: 12px;
   height: 12px;
   border-radius: 3px;
-  flex: none;
-  background: var(--tone)
+  margin-top: 4px;
+  flex: none
 }
 
 .cmp-m-note {
@@ -1809,10 +1863,10 @@ main.wrap {
 
 .win::before {
   content: "";
-  width: 10px;
-  height: 10px;
-  border-radius: 3px 6px 3px 6px;
-  background: var(--hl);
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  background: var(--brand);
   flex: none
 }
 
@@ -1842,7 +1896,7 @@ main.wrap {
   height: 18px;
   margin: 0;
   flex: none;
-  accent-color: var(--tone)
+  accent-color: var(--brand)
 }
 
 .cmp-layout .cmp-legend {
@@ -1903,14 +1957,6 @@ main.wrap {
   color: var(--muted)
 }
 
-.cmp-table thead th .sw {
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  margin-right: 8px;
-  vertical-align: -1px
-}
-
 .cmp-table tbody th {
   font-weight: 600;
   color: var(--muted);
@@ -1960,12 +2006,14 @@ main.wrap {
   outline-offset: 2px
 }
 
+/* la columna que mirás (cursor o fijada) se marca con una línea arriba del violeta de la marca */
 .cmp-table thead th {
-  border-top: 4px solid var(--tone, transparent)
+  border-top: 3px solid transparent
 }
 
-.cmp-table thead th:first-child {
-  border-top-color: transparent
+.cmp-table thead th.hl-x,
+.cmp-table thead th.pin {
+  border-top-color: var(--brand)
 }
 
 .cmp-table td.hl,
@@ -1977,17 +2025,13 @@ main.wrap {
   background: color-mix(in srgb, var(--brand) 14%, var(--surface))
 }
 
-.cmp-table thead th.hl-x {
-  box-shadow: inset 0 -3px 0 var(--tone)
-}
-
 .cmp-table.pinned td:not(.pin),
 .cmp-table.pinned thead th:not(.pin):not(:first-child) {
   opacity: .45
 }
 
 .cmp-table td.pin {
-  background: color-mix(in srgb, var(--tone, var(--brand)) 12%, var(--surface))
+  background: color-mix(in srgb, var(--brand) 12%, var(--surface))
 }
 
 .cmp-table tbody tr {
@@ -2111,15 +2155,6 @@ main.wrap {
   .cmp-m:not([hidden]) {
     display: grid;
     gap: 14px
-  }
-
-  .cmp-m .sw {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    margin-right: 8px;
-    background: var(--tone);
-    vertical-align: -1px
   }
 
   .cmp-m-head {
@@ -2905,5 +2940,11 @@ footer .wrap {
 
   .stage-body.enter {
     animation: none
+  }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .pie-slice {
+    transition: none
   }
 }
