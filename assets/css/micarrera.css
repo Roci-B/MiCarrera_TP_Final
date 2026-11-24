@@ -1751,9 +1751,13 @@ main.wrap {
   font-size: 12px
 }
 
-.cmp-layout .chart svg.pie {
-  max-width: 220px;
-  margin-inline: auto
+.chart .pie-arrow {
+  stroke: var(--ink);
+  stroke-width: 1.2
+}
+
+.chart .pie-head {
+  fill: var(--ink)
 }
 
 .pie-legend {
@@ -1762,13 +1766,14 @@ main.wrap {
   padding: 0;
   display: grid;
   gap: 8px;
-  font-size: .86rem
+  font-size: .86rem;
+  font-weight: 650
 }
 
 .pie-legend li {
   display: flex;
   gap: 8px;
-  align-items: flex-start
+  align-items: center
 }
 
 .pie-legend .sw {
@@ -1776,7 +1781,6 @@ main.wrap {
   height: 12px;
   border-radius: 3px;
   flex: none;
-  margin-top: 4px;
   background: var(--tone)
 }
 

@@ -64,22 +64,36 @@
     return s + '</svg>';
   }
 
-  // torta de salarios: las carreras con el mismo rango se unifican en una sola porción
+  // torta de salarios: las carreras con el mismo rango se unifican en una sola porción;
+  // de cada porción sale una flecha hacia las carreras que incluye
   function pieChart(p, rows) {
     const groups = [];
     rows.forEach(r => {
       const g = groups.find(x => x.rows[0].sal[0] === r.sal[0] && x.rows[0].sal[1] === r.sal[1]);
       g ? g.rows.push(r) : groups.push({rows: [r], color: r.color, value: (r.sal[0] + r.sal[1]) / 2});
     });
-    const total = groups.reduce((a, g) => a + g.value, 0), cx = 100, cy = 100, R = 90;
-    let ang = -Math.PI / 2, s = `<svg class="pie" viewBox="0 0 200 200" role="img" aria-label="${p.title}: ${groups.map(g => `${g.rows.map(r => r.name).join(' y ')} ${p.label(g.rows[0])}`).join(', ')}">`;
+    const total = groups.reduce((a, g) => a + g.value, 0), cx = 188, cy = 115, R = 60, out = 22;
+    let ang = -Math.PI / 2;
+    let slices = '', arrows = '';
     groups.forEach(g => {
-      const a = g.value / total * 2 * Math.PI, end = ang + a;
-      if (groups.length === 1) s += `<circle cx="${cx}" cy="${cy}" r="${R}" style="fill:${g.color}"/>`;
-      else s += `<path d="M${cx} ${cy}L${cx + R * Math.cos(ang)} ${cy + R * Math.sin(ang)}A${R} ${R} 0 ${a > Math.PI ? 1 : 0} 1 ${cx + R * Math.cos(end)} ${cy + R * Math.sin(end)}Z" style="fill:${g.color};stroke:var(--surface);stroke-width:2"/>`;
+      const a = g.value / total * 2 * Math.PI, end = ang + a, mid = ang + a / 2;
+      slices += groups.length === 1
+        ? `<circle cx="${cx}" cy="${cy}" r="${R}" style="fill:${g.color}"/>`
+        : `<path d="M${cx} ${cy}L${cx + R * Math.cos(ang)} ${cy + R * Math.sin(ang)}A${R} ${R} 0 ${a > Math.PI ? 1 : 0} 1 ${cx + R * Math.cos(end)} ${cy + R * Math.sin(end)}Z" style="fill:${g.color};stroke:var(--surface);stroke-width:2"/>`;
+      const c = Math.cos(mid), sn = Math.sin(mid);
+      const x1 = cx + R * .62 * c, y1 = cy + R * .62 * sn, x2 = cx + (R + out) * c, y2 = cy + (R + out) * sn;
+      const anchor = Math.abs(c) < .25 ? 'middle' : c > 0 ? 'start' : 'end';
+      const tx = x2 + (anchor === 'middle' ? 0 : c > 0 ? 6 : -6);
+      const ty = anchor === 'middle' && sn < 0 ? y2 - 6 - (g.rows.length - 1) * 12 : anchor === 'middle' ? y2 + 12 : y2 + 3 - (g.rows.length - 1) * 6;
+      arrows += `<line class="pie-arrow" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" marker-end="url(#pieHead)"/>
+        <text class="rl" x="${tx}" y="${ty}" text-anchor="${anchor}">${g.rows.map((r, i) => `<tspan x="${tx}"${i ? ' dy="12"' : ''}>${r.short}</tspan>`).join('')}</text>`;
       ang = end;
     });
-    return s + `</svg><ul class="pie-legend">${groups.map(g => `<li style="--tone:${g.color}"><span class="sw"></span><span><b>${g.rows.map(r => r.short).join(' y ')}</b>: ${p.label(g.rows[0])}</span></li>`).join('')}</ul>`;
+    const label = groups.map(g => `${g.rows.map(r => r.name).join(' y ')} ${p.label(g.rows[0])}`).join(', ');
+    return `<svg viewBox="0 0 376 230" role="img" aria-label="${p.title}: ${label}">
+      <defs><marker id="pieHead" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8z" class="pie-head"/></marker></defs>
+      ${slices}${arrows}</svg>
+      <ul class="pie-legend">${groups.map(g => `<li style="--tone:${g.color}"><span class="sw"></span>${p.label(g.rows[0])}</li>`).join('')}</ul>`;
   }
 
   /* ---------- tabla ---------- */
@@ -179,7 +193,7 @@
     $('charts').innerHTML = rows.length ? panels.map(p => {
       const best = Math.max(...rows.map(p.key));
       const winners = rows.filter(r => p.key(r) === best).map(r => r.short).join(' y ');
-      return `<figure class="chart"><figcaption><b>${p.title}</b><span>${p.sub}</span></figcaption>${p.pie ? pieChart(p, rows) : panelSVG(p, rows)}<p class="win">${p.win}: ${winners}</p></figure>`;
+      return `<figure class="chart"><figcaption><b>${p.title}</b><span>${p.sub}</span></figcaption>${p.pie ? pieChart(p, rows) : `${panelSVG(p, rows)}<p class="win">${p.win}: ${winners}</p>`}</figure>`;
     }).join('') : '<p class="note">Seleccioná al menos una carrera para ver los gráficos.</p>';
     $('cmpTableWrap').hidden = $('cmpTools').hidden = !rows.length;
     if (rows.length) drawTable(rows);
